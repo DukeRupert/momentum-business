@@ -100,7 +100,7 @@
           <span class="sr-only">Your Company</span>
           <img
             alt=""
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=primary&shade=600"
             class="h-8 w-auto"
           />
         </a>

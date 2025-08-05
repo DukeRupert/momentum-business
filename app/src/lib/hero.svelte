@@ -28,7 +28,7 @@
     <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
       <div class="flex">
         <div class="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-          <span class="font-semibold text-indigo-600">No more sleepless nights</span>
+          <span class="font-semibold text-primary-600">No more sleepless nights</span>
           <span aria-hidden="true" class="h-4 w-px bg-gray-900/10"></span>
           <a href="#" class="flex items-center gap-x-1">
             <span aria-hidden="true" class="absolute inset-0"></span>
@@ -41,11 +41,11 @@
         </div>
       </div>
       
-      <h1 class="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">
+      <h1 class="mt-10 text-display-sm font-display-bold text-gray-900">
         Focus on your business, not your books
       </h1>
       
-      <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
+      <p class="mt-8 text-body-lg text-gray-500">
         Stop losing sleep over QuickBooks and cash flow headaches. We handle the financial complexity 
         so you can get back to what you do best—growing your business and serving your customers.
       </p>
@@ -53,7 +53,7 @@
       <div class="mt-10 flex items-center gap-x-6">
         <a
           href="#"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
         >
           Get peace of mind today
         </a>
@@ -80,7 +80,7 @@
         <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/10"></div>
         
         <!-- Floating elements for visual interest -->
-        <div class="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-indigo-500 opacity-20 blur-sm"></div>
+        <div class="absolute -top-4 -right-4 h-8 w-8 rounded-full bg-primary-500 opacity-20 blur-sm"></div>
         <div class="absolute -bottom-6 -left-6 h-12 w-12 rounded-full bg-sky-400 opacity-15 blur-md"></div>
         <div class="absolute top-1/3 -left-8 h-6 w-6 rounded-full bg-purple-400 opacity-25 blur-sm"></div>
       </div>
