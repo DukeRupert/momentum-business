@@ -15,7 +15,7 @@
 
 <div class="bg-primary-700">
   <div class="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center">
+    <div id="call-to-action" class="mx-auto max-w-2xl text-center">
       <h2 class="text-headline-lg font-display-bold tracking-tight text-balance text-white sm:text-display-sm">
         {ctaData.headline}
       </h2>
