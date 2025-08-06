@@ -1,4 +1,7 @@
-<script>
+<script lang="ts">
+  import { page } from '$app/state';
+  import { onMount } from 'svelte';
+
   let { 
     title = "Contact Us",
     subtitle = "Let's start the conversation.",
@@ -9,6 +12,22 @@
       location: "Serving clients remotely nationwide"
     }
   } = $props();
+
+  // Service checkbox states
+  let checkedServices: Record<string, boolean> = $state({
+    bookkeeping: false,
+    payroll: false,
+    consulting: false,
+    cleanup: false
+  });
+
+  // Check query params on mount and update checkboxes accordingly
+  onMount(() => {
+    const service = page.url.searchParams.get('service');
+    if (service && checkedServices.hasOwnProperty(service)) {
+      checkedServices[service] = true;
+    }
+  });
 </script>
 
 <div class="relative isolate bg-white">
@@ -176,6 +195,7 @@
                       name="services" 
                       value="bookkeeping" 
                       type="checkbox" 
+                      bind:checked={checkedServices.bookkeeping}
                       class="size-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 focus:ring-offset-0"
                     />
                   </div>
@@ -188,14 +208,15 @@
                 <div class="flex items-start gap-3">
                   <div class="flex h-6 items-center">
                     <input 
-                      id="service-bookkeeping-payroll" 
+                      id="service-payroll" 
                       name="services" 
-                      value="bookkeeping-payroll" 
+                      value="payroll" 
                       type="checkbox" 
+                      bind:checked={checkedServices.payroll}
                       class="size-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 focus:ring-offset-0"
                     />
                   </div>
-                  <label for="service-bookkeeping-payroll" class="text-body text-gray-700">
+                  <label for="service-payroll" class="text-body text-gray-700">
                     <span class="font-primary-medium">Bookkeeping + Payroll</span>
                     <span class="block text-caption text-gray-500">Starting at $1,250/month</span>
                   </label>
@@ -208,6 +229,7 @@
                       name="services" 
                       value="consulting" 
                       type="checkbox" 
+                      bind:checked={checkedServices.consulting}
                       class="size-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 focus:ring-offset-0"
                     />
                   </div>
@@ -224,6 +246,7 @@
                       name="services" 
                       value="cleanup" 
                       type="checkbox" 
+                      bind:checked={checkedServices.cleanup}
                       class="size-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600 focus:ring-offset-0"
                     />
                   </div>

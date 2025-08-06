@@ -1,10 +1,9 @@
 <script>
   const footerData = {
     navigation: [
-      { name: "About Us", href: "/about-us" },
-      { name: "Services", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Contact", href: "#" },
+      { name: 'Services', href: '/services' },
+      { name: "About", href: "/about" },
+      { name: "Contact", href: "/contact" },
       { name: "Privacy", href: "#" },
       { name: "Terms", href: "#" }
     ],

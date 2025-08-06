@@ -2,10 +2,9 @@
   import { fade, fly } from 'svelte/transition';
   
   const navigation = [
-    { name: 'About Us', href: '/about-us' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   let mobileMenuOpen = $state(false);

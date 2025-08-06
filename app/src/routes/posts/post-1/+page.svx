@@ -1,4 +1,5 @@
 ---
+layout: '../layout.svelte'
 title: My lovely article
 author: Dr. Fabuloso the Fabulous
 ---

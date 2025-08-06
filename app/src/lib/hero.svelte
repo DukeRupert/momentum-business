@@ -26,7 +26,7 @@
   
   <div id="hero" class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
     <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-      <div class="flex">
+      <!-- <div class="flex">
         <div class="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
           <span class="font-semibold text-primary-600">No more sleepless nights</span>
           <span aria-hidden="true" class="h-4 w-px bg-gray-900/10"></span>
@@ -34,12 +34,12 @@
             <span aria-hidden="true" class="absolute inset-0"></span>
             Over financial stress
             <!-- ChevronRightIcon -->
-            <svg aria-hidden="true" class="-mr-2 size-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <!-- <svg aria-hidden="true" class="-mr-2 size-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>
           </a>
         </div>
-      </div>
+      </div> -->
       
       <h1 class="mt-10 text-display-sm font-display-bold text-gray-900">
         Focus on your business, not your books
@@ -52,12 +52,12 @@
       
       <div class="mt-10 flex items-center gap-x-6">
         <a
-          href="#"
+          href="/contact"
           class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
         >
-          Get peace of mind today
+          Schedule a free consultation
         </a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">
+        <a href="/services" class="text-sm/6 font-semibold text-gray-900">
           See how we help <span aria-hidden="true">→</span>
         </a>
       </div>
