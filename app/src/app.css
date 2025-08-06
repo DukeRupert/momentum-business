@@ -136,15 +136,19 @@ h6 { font-size: var(--text-body-lg); line-height: var(--leading-normal); font-we
 /* Color utility classes */
 .bg-primary-50 { background-color: var(--primary-50); }
 .bg-primary-100 { background-color: var(--primary-100); }
+.bg-primary-200 { background-color: var(--primary-200); }
 .bg-primary-500 { background-color: var(--primary-500); }
 .bg-primary-600 { background-color: var(--primary-600); }
+.bg-primary-700 { background-color: var(--primary-700); }
 
-.text-primary-600 { color: var(--primary-600); }
+.text-primary-200 { color: var(--primary-200); }
 .text-primary-500 { color: var(--primary-500); }
+.text-primary-600 { color: var(--primary-600); }
 
 .border-primary-500 { border-color: var(--primary-500); }
 .ring-primary-600 { --tw-ring-color: var(--primary-600); }
 
+.hover\:bg-primary-50:hover { background-color: var(--primary-50); }
 .hover\:bg-primary-500:hover { background-color: var(--primary-500); }
 .focus-visible\:outline-primary-600:focus-visible { outline-color: var(--primary-600); }
 
