@@ -1,9 +1,0 @@
----
-layout: '../layout.svelte'
-title: My lovely article
-author: Dr. Fabuloso the Fabulous
----
-
-# {title} by {author}
-
-Some amazing content.

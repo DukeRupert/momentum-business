@@ -6,11 +6,11 @@
       category: "Marketing",
       categoryHref: "#",
       title: "Boost your conversion rate",
-      titleHref: "#",
+      titleHref: "/posts/boost-your-conversion-rate",
       excerpt: "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
       authorImage: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       authorName: "Michael Foster",
-      authorTitle: "Co-Founder / CTO",
+      authorTitle: "Owner / CEO",
       authorHref: "#"
     },
     {
