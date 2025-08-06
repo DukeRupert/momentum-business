@@ -2,6 +2,7 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Navigation from '$lib/navigation.svelte';
+	import Footer from '$lib/footer.svelte';
 
 	let { children } = $props();
 </script>
@@ -13,4 +14,5 @@
 <div class="bg-white">
 	<Navigation />
 	{@render children?.()}
+	<Footer />
 </div>
