@@ -5,8 +5,8 @@
 	import { enhance } from '$app/forms';
 
 	let { params, data: formData, form }: PageProps = $props();
-    let errors = $derived(formData.errors)
-    $inspect(errors)
+	let errors = $derived(formData.errors);
+	$inspect(errors);
 
 	let title = 'Contact Us';
 	let subtitle = "Let's start the conversation.";
@@ -20,9 +20,9 @@
 
 	// Service checkbox states
 	let checkedServices: Record<string, boolean> = $state({
-		bookkeeping: false,
-		payroll: false,
-		consulting: false,
+		essentials: false,
+		growthStrategy: false,
+		executiveOperations: false,
 		cleanup: false
 	});
 
@@ -361,51 +361,51 @@
 								<div class="flex items-start gap-3">
 									<div class="flex h-6 items-center">
 										<input
-											id="service-bookkeeping"
+											id="service-essentials"
 											name="services"
-											value="bookkeeping"
+											value="essentials"
 											type="checkbox"
-											bind:checked={checkedServices.bookkeeping}
+											bind:checked={checkedServices.essentials}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>
-									<label for="service-bookkeeping" class="text-body text-gray-700">
-										<span class="font-primary-medium">Basic Bookkeeping</span>
-										<span class="text-caption block text-gray-500">Starting at $750/month</span>
+									<label for="service-essentials" class="text-body text-gray-700">
+										<span class="font-primary-medium">Essentials Package</span>
+										<span class="text-caption block text-gray-500">$750/month</span>
 									</label>
 								</div>
 
 								<div class="flex items-start gap-3">
 									<div class="flex h-6 items-center">
 										<input
-											id="service-payroll"
+											id="service-growth-strategy"
 											name="services"
-											value="payroll"
+											value="growth-strategy"
 											type="checkbox"
-											bind:checked={checkedServices.payroll}
+											bind:checked={checkedServices.growthStrategy}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>
-									<label for="service-payroll" class="text-body text-gray-700">
-										<span class="font-primary-medium">Bookkeeping + Payroll</span>
-										<span class="text-caption block text-gray-500">Starting at $1,250/month</span>
+									<label for="service-growth-strategy" class="text-body text-gray-700">
+										<span class="font-primary-medium">Growth Strategy Package</span>
+										<span class="text-caption block text-gray-500">$1,250/month</span>
 									</label>
 								</div>
 
 								<div class="flex items-start gap-3">
 									<div class="flex h-6 items-center">
 										<input
-											id="service-consulting"
+											id="service-executive-operations"
 											name="services"
-											value="consulting"
+											value="executive-operations"
 											type="checkbox"
-											bind:checked={checkedServices.consulting}
+											bind:checked={checkedServices.executiveOperations}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>
-									<label for="service-consulting" class="text-body text-gray-700">
-										<span class="font-primary-medium">Financial Consulting</span>
-										<span class="text-caption block text-gray-500">$150/hour</span>
+									<label for="service-executive-operations" class="text-body text-gray-700">
+										<span class="font-primary-medium">Executive Operations Package</span>
+										<span class="text-caption block text-gray-500">Starting at $2,000/month</span>
 									</label>
 								</div>
 

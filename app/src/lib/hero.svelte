@@ -72,6 +72,8 @@
               src="https://img1.wsimg.com/isteam/getty/500878416/:/rs=w:1279,m" 
               alt="Dashboard screenshot" 
               class="w-full h-auto rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+              height=465
+              width=656
             />
           </div>
         </div>
