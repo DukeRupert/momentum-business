@@ -23,8 +23,10 @@
 		essentials: false,
 		growthStrategy: false,
 		executiveOperations: false,
+		completeSupport: false,
 		cleanup: false
 	});
+	$inspect(checkedServices)
 
 	// Form state
 	let isSubmitting = $state(false);
@@ -32,7 +34,9 @@
 	// Check query params on mount and update checkboxes accordingly
 	onMount(() => {
 		const service = page.url.searchParams.get('service');
+		console.log(`service: ` + service)
 		if (service && checkedServices.hasOwnProperty(service)) {
+			console.log('checkedService containers property: ' + service)
 			checkedServices[service] = true;
 		}
 	});
@@ -400,6 +404,23 @@
 											value="executive-operations"
 											type="checkbox"
 											bind:checked={checkedServices.executiveOperations}
+											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
+										/>
+									</div>
+									<label for="service-executive-operations" class="text-body text-gray-700">
+										<span class="font-primary-medium">Executive Operations Package</span>
+										<span class="text-caption block text-gray-500">Starting at $2,000/month</span>
+									</label>
+								</div>
+
+								<div class="flex items-start gap-3">
+									<div class="flex h-6 items-center">
+										<input
+											id="service-complete-support"
+											name="services"
+											value="complete-support"
+											type="checkbox"
+											bind:checked={checkedServices.completeSupport}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>

@@ -76,7 +76,7 @@
 			<div class="flex items-start justify-end lg:order-first">
 				<img
 					alt="Product screenshot"
-					src="https://tailwindcss.com/plus-assets/img/component-images/project-app-screenshot.png"
+					src="https://as2.ftcdn.net/v2/jpg/10/58/87/61/1000_F_1058876100_ZN9yjJLPq3jODb1YCRFLPTcTs48siq3V.jpg"
 					width={2432}
 					height={1442}
 					class="w-3xl sm:w-228 max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10"

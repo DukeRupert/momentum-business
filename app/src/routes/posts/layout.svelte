@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  import Cta from "$lib/cta.svelte";
   export let category = '';
   export let title = '';
   export let subtitle = '';
@@ -6,12 +7,12 @@
   export let author = '';
   export let authorRole = '';
   export let authorImage = '';
-  export let tags = [];
+  export let tags: string[] = [];
   export let description = '';
   export let readingTime = '';
   export let featuredImage = '';
   export let featuredImageCaption = '';
-  export let highlights = [];
+  export let highlights: { title: string, description: string }[] = [];
 </script>
 
 <svelte:head>
@@ -127,6 +128,7 @@
     </div>
   </div>
 </div>
+<Cta />
 
 <!-- <style>
   /* Global styles for markdown content */
