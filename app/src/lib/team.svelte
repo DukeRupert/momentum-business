@@ -77,8 +77,8 @@
 </script>
 
 <div class="bg-white py-24 md:py-32">
-  <div class="mx-auto grid max-w-7xl grid-cols-5 gap-20 px-6 lg:px-8">
-    <div class="max-w-2xl md:col-span-2">
+  <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-5 gap-20 px-6 lg:px-8">
+    <div class="max-w-2xl lg:col-span-2">
       <h2 class="text-headline-lg font-display-semibold tracking-tight text-pretty text-gray-900 sm:text-display-sm">
         {teamData.title}
       </h2>
@@ -87,7 +87,7 @@
       </p>
     </div>
     
-    <ul role="list" class="divide-y divide-gray-200 md:col-span-3">
+    <ul role="list" class="divide-y divide-gray-200 lg:col-span-3">
       {#each teamData.members as member}
         <li class="flex flex-col gap-10 py-12 first:pt-0 last:pb-0 sm:flex-row">
           <img 
