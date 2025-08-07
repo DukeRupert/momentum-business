@@ -92,7 +92,7 @@
             {/if}
             
             <div class="mb-4">
-              <span class="text-display font-display-bold text-primary-600">
+              <span class="text-display font-display-bold text-gray-900">
                 {price}
               </span>
               <p class="text-kicker font-primary-semibold text-gray-600 uppercase tracking-wide mt-1">
