@@ -2,6 +2,7 @@
 	import SectionHeader from '$lib/header.svelte';
 	import Cleanup from '$lib/cleanup.svelte';
 	import Premium from '$lib/premium.svelte';
+	import Consulting from '$lib/consulting.svelte';
 
 	// Services data with new Momentum Business Solutions packages
 	const servicesData = [
@@ -172,7 +173,9 @@
 					</div>
 				</div>
 			{/each}
+			
 		</div>
+		<Consulting />
 	</div>
 </section>
 
