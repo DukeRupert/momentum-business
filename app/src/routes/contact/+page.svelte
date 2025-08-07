@@ -421,8 +421,8 @@
 										/>
 									</div>
 									<label for="service-cleanup" class="text-body text-gray-700">
-										<span class="font-primary-medium">Bookkeeping Cleanup</span>
-										<span class="text-caption block text-gray-500">Custom quote</span>
+										<span class="font-primary-medium">QuickBooks Cleanup</span>
+										<span class="text-caption block text-gray-500">$750</span>
 									</label>
 								</div>
 							</div>

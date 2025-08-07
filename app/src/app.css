@@ -138,6 +138,13 @@ h6 { font-size: var(--text-body-lg); line-height: var(--leading-normal); font-we
 .bg-primary-600 { background-color: var(--primary-600); }
 .bg-primary-700 { background-color: var(--primary-700); }
 
+.bg-secondary-50 { background-color: var(--secondary-50); }
+.bg-secondary-100 { background-color: var(--secondary-100); }
+.bg-secondary-200 { background-color: var(--secondary-200); }
+.bg-secondary-500 { background-color: var(--secondary-500); }
+.bg-secondary-600 { background-color: var(--secondary-600); }
+.bg-secondary-700 { background-color: var(--secondary-700); }
+
 .text-primary-200 { color: var(--primary-200); }
 .text-primary-500 { color: var(--primary-500); }
 .text-primary-600 { color: var(--primary-600); }
