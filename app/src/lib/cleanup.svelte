@@ -36,8 +36,8 @@
     <!-- Special offer badge -->
     {#if showSpecialBadge}
       <div class="mb-8 flex justify-center">
-        <div class="relative rounded-full bg-secondary-500 px-6 py-2">
-          <span class="text-kicker font-primary-semibold text-white uppercase tracking-wide">
+        <div class="relative rounded-full border-primary-500 border-solid border-2 px-6 py-2">
+          <span class="text-kicker font-primary-semibold text-primary uppercase tracking-wide">
            {specialText}
           </span>
         </div>

@@ -46,32 +46,6 @@
 			popular: true,
 			ctaText: 'Most Popular',
 			ctaHref: '/contact?service=growth-strategy'
-		},
-		{
-			id: 'executive-operations',
-			name: 'Executive Operations Package',
-			tier: 'Tier 3',
-			price: 'Starting at $2,000',
-			period: '/month',
-			timeCommitment: '14–18 hours/month',
-			description: 'For businesses needing full finance + HR + operations support.',
-			features: [
-				'Everything in Tier 2, plus:',
-				'Custom KPI dashboard creation and reporting',
-				'Strategic planning sessions and quarterly reviews',
-				'Organizational chart development and role clarity planning',
-				'HR consulting: employee handbooks, evaluation processes, compliance basics',
-				'SOP development and team performance systems',
-				'Leadership meeting support and preparation',
-				'Slack/text access for urgent items',
-				'Add-on payroll support for more than 10 employees (custom quote)'
-			],
-			bestFor:
-				'Owner-operators who want to delegate the back-office and focus on high-level growth.',
-			popular: false,
-			ctaText: 'Learn More',
-			ctaHref: '/contact?service=executive-operations',
-			note: 'Customized based on complexity'
 		}
 	];
 
@@ -148,11 +122,6 @@
 								{service.period}
 							</span>
 						</div>
-						{#if service.note}
-							<p class="text-caption mt-1 text-gray-500">
-								({service.note})
-							</p>
-						{/if}
 						<p class="text-caption text-primary-600 mt-1 font-medium">
 							Estimated Time Commitment: {service.timeCommitment}
 						</p>

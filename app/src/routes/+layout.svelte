@@ -4,6 +4,7 @@
 	import Navigation from '$lib/navigation.svelte';
 	import Footer from '$lib/footer.svelte';
 	import Banner from '$lib/banner.svelte';
+	import ColorSchemeSelector from '$lib/colorSchemeSelector.svelte';
 
 	let { children } = $props();
 </script>
@@ -14,6 +15,7 @@
 
 <div class="bg-white">
 	<Banner />
+	<ColorSchemeSelector />
 	<Navigation />
 	{@render children?.()}
 	<Footer />

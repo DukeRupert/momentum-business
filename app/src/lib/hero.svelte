@@ -69,7 +69,7 @@
           <div class="absolute -inset-px rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10"></div>
           <div class="relative rounded-2xl bg-white/80 backdrop-blur-sm p-2">
             <img 
-              src="https://img1.wsimg.com/isteam/getty/500878416/:/rs=w:1279,m" 
+              src="https://as1.ftcdn.net/v2/jpg/05/44/89/00/1000_F_544890008_Uz7Doo5ljyzPTT812qSSfdKPQpgEOUQp.jpg" 
               alt="Dashboard screenshot" 
               class="w-full h-auto rounded-xl shadow-2xl ring-1 ring-gray-900/10"
               height=907

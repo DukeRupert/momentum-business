@@ -5,7 +5,7 @@
     serviceTitle = "Complete Business Support",
     serviceDescription = "Running a small business comes with no shortage of challenges—balancing finances, managing a team, and planning for growth. We help you move from reactive problem-solving to proactive leadership.",
     pricingLabel = "Monthly partnership investment",
-    price = "$3,500",
+    price = "$2,500",
     currency = "USD",
     ctaText = "Schedule Discovery Call",
     ctaHref = "/contact?service=completeSupport",
