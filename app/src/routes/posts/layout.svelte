@@ -25,7 +25,7 @@
     <!-- Header Section -->
     <header class="post-header border-b-2 border-gray-100 pb-8 mb-10">
       {#if category}
-        <p class="text-base/7 font-semibold text-indigo-600">{category}</p>
+        <p class="text-base/7 font-semibold text-primary-600">{category}</p>
       {/if}
       
       <h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
@@ -70,7 +70,7 @@
       {#if tags && tags.length > 0}
         <div class="mt-4 flex flex-wrap gap-2">
           {#each tags as tag}
-            <span class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">
+            <span class="bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
               #{tag}
             </span>
           {/each}
@@ -87,7 +87,7 @@
         <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
           {#each highlights as highlight}
             <li class="flex gap-x-3">
-              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mt-1 size-5 flex-none text-indigo-600">
+              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mt-1 size-5 flex-none text-primary-600">
                 <path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" fill-rule="evenodd" />
               </svg>
               <span>
@@ -145,7 +145,7 @@
   }
 
   :global(.prose blockquote) {
-    @apply mt-10 border-l border-indigo-600 pl-9;
+    @apply mt-10 border-l border-primary-600 pl-9;
   }
 
   :global(.prose blockquote p) {
@@ -177,6 +177,6 @@
   }
 
   :global(.prose a) {
-    @apply text-indigo-600 hover:text-indigo-500 underline decoration-indigo-200 hover:decoration-indigo-300;
+    @apply text-primary-600 hover:text-primary-500 underline decoration-primary-200 hover:decoration-primary-300;
   }
 </style> -->

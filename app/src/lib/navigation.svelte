@@ -1,5 +1,6 @@
 <script>
   import { fade, fly } from 'svelte/transition';
+  import Logo from '$lib/assets/logo_symbol.png';
   
   const navigation = [
     { name: 'Services', href: '/services' },
@@ -45,9 +46,9 @@
     <a href="/" class="-m-1.5 p-1.5">
       <span class="sr-only">Your Company</span>
       <img
-        alt=""
-        src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-        class="h-8 w-auto"
+        alt="Momentum Business logo"
+        src={Logo}
+        class="h-12 w-auto rounded-full"
       />
     </a>
     
@@ -95,12 +96,12 @@
       transition:fly={{ x: 300, duration: 300 }}
     >
       <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
+        <a href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
           <img
-            alt=""
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=primary&shade=600"
-            class="h-8 w-auto"
+            alt="Momentum Business logo"
+        src={Logo}
+            class="h-12 w-auto rounded-full"
           />
         </a>
         

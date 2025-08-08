@@ -16,18 +16,32 @@
   --color-cloud-burst-800: #2d41a0;
   --color-cloud-burst-900: #293a7f;
 
+  --color-everglade-50: #f4f9f5;
+  --color-everglade-100: #e6f2e7;
+  --color-everglade-200: #cde5cf;
+  --color-everglade-300: #a6cfab;
+  --color-everglade-400: #77b17e;
+  --color-everglade-500: #53945c;
+  --color-everglade-600: #417848;
+  --color-everglade-700: #35603b;
+  --color-everglade-800: #2e4d33;
+  --color-everglade-900: #27402b;
+  --color-everglade-950: #112214;
+
+
+
   /* Primary Theme Colors (deeper blue-purple) */
---primary-50: #f4f3ff;
---primary-100: #ebe9fe;
---primary-200: #d9d6fe;
---primary-300: #bfb8fd;
---primary-400: #a090fa;
---primary-500: #8b5cf6;
---primary-600: #7c3aed;
---primary-700: #6d28d9;
---primary-800: #5b21b6;
---primary-900: #4c1d95;
---primary-950: #2e1065;
+  --primary-50: var(--color-everglade-50);
+  --primary-100: var(--color-everglade-100);
+  --primary-200: var(--color-everglade-200);
+  --primary-300: var(--color-everglade-300);
+  --primary-400: var(--color-everglade-400);
+  --primary-500: var(--color-everglade-500);
+  --primary-600: var(--color-everglade-600);
+  --primary-700: var(--color-everglade-700);
+  --primary-800: var(--color-everglade-800);
+  --primary-900: var(--color-everglade-900);
+  --primary-950: var(--color-everglade-950);
 
   /* Secondary Theme Colors (now cloud-burst) */
   --secondary-50: #f1f5fd;
