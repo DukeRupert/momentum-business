@@ -46,7 +46,7 @@
 			bestFor: 'Businesses ready to scale with a proactive financial partner.',
 			popular: true,
 			ctaText: 'Most Popular',
-			ctaHref: '/contact?service=growth-strategy'
+			ctaHref: '/contact?service=growthStrategy'
 		}
 	];
 

@@ -1,12 +1,9 @@
-import { fail, type ServerLoad } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
 import { schema } from './schema';
 import { z } from 'zod/v4'
-
-export const load: ServerLoad = () => {
-    let e = {}
-    return { errors: e}
-}
+import { POSTMARK_TO, POSTMARK_FROM, POSTMARK_API_KEY } from '$env/static/private'
+import { sendContactFormEmail, sendThankYouEmail, type ContactFormData } from './email';
 
 export const actions: Actions = {
     default: async ({ request }) => {
@@ -32,8 +29,6 @@ export const actions: Actions = {
         console.log(result)
         if (!result.success) {
             let e = z.flattenError(result.error)
-            console.log('Flatten Errors: ')
-            console.log(e)
             return fail(400, {
                 errors: e,
                 data: rawData
@@ -44,32 +39,43 @@ export const actions: Actions = {
         const validatedData = result.data;
 
         try {
-            // TODO: Add your form processing logic here
-            // Examples:
-            // - Send email notification
-            // - Save to database
-            // - Integrate with CRM
-            // - Send to third-party service
+            // Send notification email to client
+            const clientEmailResult = await sendContactFormEmail(validatedData, POSTMARK_API_KEY, POSTMARK_TO, POSTMARK_FROM);
 
-            console.log('Form submitted successfully:', validatedData);
+            if (!clientEmailResult.success) {
+                throw new Error(`Failed to send client notification: ${clientEmailResult.error}`);
+            }
 
-            // For now, we'll simulate a successful submission
-            // You would replace this with your actual processing logic
+            // Send thank you email to form submitter
+            const thankYouResult = await sendThankYouEmail({
+                formData: validatedData,
+                postmarkToken: POSTMARK_API_KEY,
+                fromEmail: POSTMARK_FROM
+            });
+
+            if (!thankYouResult.success) {
+                console.warn('Thank you email failed, but client notification succeeded:', thankYouResult.error);
+                // Don't fail the entire process if thank you email fails
+            }
 
             return {
                 success: true,
-                message: 'Thank you for your message! We\'ll get back to you soon.'
+                clientEmailSent: clientEmailResult.success,
+                thankYouEmailSent: thankYouResult.success,
+                data: {
+                    clientEmail: clientEmailResult.data,
+                    thankYouEmail: thankYouResult.data
+                }
             };
 
         } catch (error) {
-            console.error('Error processing form:', error);
-
-            return fail(500, {
-                errors: {
-                    _form: ['An error occurred while processing your request. Please try again.']
-                },
-                data: rawData
-            });
+            console.error('Contact form submission failed:', error);
+            return {
+                success: false,
+                error: (error as Error).message,
+                clientEmailSent: false,
+                thankYouEmailSent: false
+            };
         }
     }
 };

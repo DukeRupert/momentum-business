@@ -3,10 +3,9 @@
 	import type { PageProps } from './$types';
 	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
+	import Errors from './errors.svelte';
 
 	let { params, data: formData, form }: PageProps = $props();
-	let errors = $derived(formData.errors);
-	$inspect(errors);
 
 	let title = 'Contact Us';
 	let subtitle = "Let's start the conversation.";
@@ -23,10 +22,9 @@
 		essentials: false,
 		growthStrategy: false,
 		executiveOperations: false,
-		completeSupport: false,
+		consulting: false,
 		cleanup: false
 	});
-	$inspect(checkedServices)
 
 	// Form state
 	let isSubmitting = $state(false);
@@ -34,9 +32,9 @@
 	// Check query params on mount and update checkboxes accordingly
 	onMount(() => {
 		const service = page.url.searchParams.get('service');
-		console.log(`service: ` + service)
+		console.log(`service: ` + service);
 		if (service && checkedServices.hasOwnProperty(service)) {
-			console.log('checkedService containers property: ' + service)
+			console.log('checkedService containers property: ' + service);
 			checkedServices[service] = true;
 		}
 	});
@@ -241,20 +239,16 @@
 						>
 						<div class="mt-2.5">
 							<input
-								id="first-name"
 								type="text"
 								name="first-name"
 								value={formData['first-name'] || ''}
-								autocomplete="given-name"
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'first-name'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
+								required
+								minlength="2"
+								maxlength="50"
+								pattern="[a-zA-Z\s'-]+"
+								title="First name can only contain letters, spaces, hyphens, and apostrophes"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							/>
-							{#if hasFieldError('first-name')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('first-name')}</p>
-							{/if}
 						</div>
 					</div>
 
@@ -268,16 +262,14 @@
 								type="text"
 								name="last-name"
 								value={formData['last-name'] || ''}
+								required
+								minlength="2"
+								maxlength="50"
+								pattern="[a-zA-Z\s'-]+"
+								title="Last name can only contain letters, spaces, hyphens, and apostrophes"
 								autocomplete="family-name"
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'last-name'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							/>
-							{#if hasFieldError('last-name')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('last-name')}</p>
-							{/if}
 						</div>
 					</div>
 
@@ -290,17 +282,11 @@
 								id="email"
 								type="email"
 								name="email"
+								required
 								value={formData.email || ''}
 								autocomplete="email"
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'email'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							/>
-							{#if hasFieldError('email')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('email')}</p>
-							{/if}
 						</div>
 					</div>
 
@@ -313,17 +299,14 @@
 								id="phone-number"
 								type="tel"
 								name="phone-number"
+								required
+								pattern={"^\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$"}
+								title="Please enter a valid phone number (7-15 digits, may include +, spaces, hyphens, parentheses, and dots)"
+								placeholder="+1 (555) 123-4567"
 								value={formData['phone-number'] || ''}
 								autocomplete="tel"
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'phone-number'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							/>
-							{#if hasFieldError('phone-number')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('phone-number')}</p>
-							{/if}
 						</div>
 					</div>
 
@@ -336,12 +319,9 @@
 							<select
 								id="annual-revenue"
 								name="annual-revenue"
+								required
 								value={formData['annual-revenue'] || ''}
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'annual-revenue'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} focus:outline-2 focus:-outline-offset-2"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2"
 							>
 								<option value="">Select revenue range</option>
 								<option value="under-100k">Under $100K</option>
@@ -350,16 +330,13 @@
 								<option value="1m-5m">$1M - $5M</option>
 								<option value="over-5m">Over $5M</option>
 							</select>
-							{#if hasFieldError('annual-revenue')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('annual-revenue')}</p>
-							{/if}
 						</div>
 					</div>
 
 					<div class="sm:col-span-2">
 						<fieldset>
 							<legend class="text-caption font-primary-semibold mb-4 block text-gray-900"
-								>Services you're interested in</legend
+								>Services you are interested in</legend
 							>
 							<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 								<div class="flex items-start gap-3">
@@ -399,11 +376,11 @@
 								<div class="flex items-start gap-3">
 									<div class="flex h-6 items-center">
 										<input
-											id="service-executive-operations"
+											id="service-complete-support"
 											name="services"
-											value="executive-operations"
+											value="complete-support"
 											type="checkbox"
-											bind:checked={checkedServices.executiveOperations}
+											bind:checked={checkedServices.completeSupport}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>
@@ -416,17 +393,17 @@
 								<div class="flex items-start gap-3">
 									<div class="flex h-6 items-center">
 										<input
-											id="service-complete-support"
+											id="service-consulting"
 											name="services"
-											value="complete-support"
+											value="consulting"
 											type="checkbox"
-											bind:checked={checkedServices.completeSupport}
+											bind:checked={checkedServices.consulting}
 											class="text-primary-600 focus:ring-primary-600 size-4 rounded border-gray-300 focus:ring-offset-0"
 										/>
 									</div>
 									<label for="service-executive-operations" class="text-body text-gray-700">
-										<span class="font-primary-medium">Executive Operations Package</span>
-										<span class="text-caption block text-gray-500">Starting at $2,000/month</span>
+										<span class="font-primary-medium">Financial Consulting</span>
+										<span class="text-caption block text-gray-500">$150/hour</span>
 									</label>
 								</div>
 
@@ -447,9 +424,6 @@
 									</label>
 								</div>
 							</div>
-							{#if hasFieldError('services')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('services')}</p>
-							{/if}
 						</fieldset>
 					</div>
 
@@ -462,19 +436,15 @@
 								id="message"
 								name="message"
 								rows="4"
+								maxlength="2000"
 								value={formData.message || ''}
-								class="text-body block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 {hasFieldError(
-									'message'
-								)
-									? 'outline-red-300 focus:outline-red-600'
-									: 'focus:outline-primary-600 outline-gray-300'} placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
+								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							></textarea>
-							{#if hasFieldError('message')}
-								<p class="mt-2 text-sm text-red-600">{getFieldError('message')}</p>
-							{/if}
 						</div>
 					</div>
 				</div>
+
+				<Errors errors={form?.errors} />
 
 				<div class="mt-8 flex justify-end">
 					<button
