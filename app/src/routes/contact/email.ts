@@ -15,16 +15,16 @@ export interface ThankYouEmailOptions {
 }
 
 // Available services
-export type Service = 
-  | 'essentials'
-  | 'payroll'
-  | 'planning'
-  | 'tax-prep'
-  | 'bookkeeping';
+export type Service =
+    | 'essentials'
+    | 'payroll'
+    | 'planning'
+    | 'tax-prep'
+    | 'bookkeeping';
 
 export async function sendContactFormEmail(formData: ContactFormData, postmarkToken: string, to: string, from: string) {
     // Helper function to format service names
-    function formatService(service: string) {
+    function formatService(service: Service) {
         const serviceMap = {
             'essentials': 'QuickBooks Essentials',
             'payroll': 'Payroll Management',
@@ -47,7 +47,7 @@ export async function sendContactFormEmail(formData: ContactFormData, postmarkTo
     }
 
     // Helper function to get service class for styling
-    function getServiceClass(service: string) {
+    function getServiceClass(service: Service) {
         const classMap = {
             'essentials': 'bookkeeping',
             'payroll': 'payroll',
@@ -58,7 +58,7 @@ export async function sendContactFormEmail(formData: ContactFormData, postmarkTo
         return classMap[service] || 'bookkeeping';
     }
 
-    // Get current timestamp
+    // Get current timestamp in PST
     const timestamp = new Date().toLocaleString('en-US', {
         weekday: 'long',
         year: 'numeric',
@@ -66,6 +66,7 @@ export async function sendContactFormEmail(formData: ContactFormData, postmarkTo
         day: 'numeric',
         hour: 'numeric',
         minute: '2-digit',
+        timeZone: 'America/Los_Angeles',
         timeZoneName: 'short'
     });
 

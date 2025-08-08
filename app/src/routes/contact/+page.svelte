@@ -38,16 +38,6 @@
 			checkedServices[service] = true;
 		}
 	});
-
-	// Helper function to get field error
-	function getFieldError(fieldName: string): string {
-		return '';
-	}
-
-	// Helper function to check if field has error
-	function hasFieldError(fieldName: string): boolean {
-		return false;
-	}
 </script>
 
 <div class="relative isolate bg-white">

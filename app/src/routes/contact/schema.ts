@@ -34,13 +34,7 @@ export const schema = z.object({
 
     services: z
         .array(z.string())
-        .min(1, 'Please select at least one service you\'re interested in')
-        .refine(
-            (services) => services.every(service =>
-                ['essentials', 'growth-strategy', 'executive-operations', 'complete-support', 'cleanup'].includes(service)
-            ),
-            'Invalid service selection'
-        ),
+        .min(1, 'Please select at least one service you\'re interested in'),
 
     message: z
         .string()
