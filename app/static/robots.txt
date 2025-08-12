@@ -6,6 +6,7 @@ Allow: /
 Allow: /services
 Allow: /about  
 Allow: /contact
+Allow: /privacy
 Allow: /posts/
 
 # Block any admin or sensitive areas (add as needed)
