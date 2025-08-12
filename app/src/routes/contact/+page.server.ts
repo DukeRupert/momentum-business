@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { schema } from './schema';
 import { z } from 'zod/v4'
@@ -58,24 +58,32 @@ export const actions: Actions = {
                 // Don't fail the entire process if thank you email fails
             }
 
+            // Return success data - let client handle redirect
             return {
                 success: true,
                 clientEmailSent: clientEmailResult.success,
                 thankYouEmailSent: thankYouResult.success,
                 data: {
+                    firstName: validatedData['first-name'],
+                    email: validatedData.email,
                     clientEmail: clientEmailResult.data,
                     thankYouEmail: thankYouResult.data
                 }
             };
 
         } catch (error) {
-            console.error('Contact form submission failed:', error);
-            return {
-                success: false,
-                error: (error as Error).message,
-                clientEmailSent: false,
-                thankYouEmailSent: false
-            };
+            // Only catch actual errors, not redirects
+            if (error.name === 'Error') {
+                console.error('Contact form submission failed:', error);
+                return {
+                    success: false,
+                    error: (error as Error).message,
+                    clientEmailSent: false,
+                    thankYouEmailSent: false
+                };
+            }
+            // Re-throw if it's something else (like a redirect)
+            throw error;
         }
     }
 };

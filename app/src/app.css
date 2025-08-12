@@ -404,3 +404,18 @@ h6 {
 .text-secondary-600 {
   color: var(--secondary-600);
 }
+
+/* Svelte Kit announcer fix - prevent layout shift */
+#svelte-announcer {
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+}

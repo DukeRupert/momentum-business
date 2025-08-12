@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
 	import Errors from './errors.svelte';
+	import { goto } from '$app/navigation';
 
 	let { params, data: formData, form }: PageProps = $props();
 
@@ -32,9 +33,7 @@
 	// Check query params on mount and update checkboxes accordingly
 	onMount(() => {
 		const service = page.url.searchParams.get('service');
-		console.log(`service: ` + service);
 		if (service && checkedServices.hasOwnProperty(service)) {
-			console.log('checkedService containers property: ' + service);
 			checkedServices[service] = true;
 		}
 	});
@@ -179,31 +178,27 @@
 			class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
 			use:enhance={() => {
 				isSubmitting = true;
-				return async ({ update }) => {
-					await update();
+				return async ({ result, update }) => {
+					if (result.type === 'success' && result.data?.success) {
+						// Get form data from the server response
+						const firstName = result.data.data?.firstName || '';
+						const email = result.data.data?.email || '';
+
+						// Build query parameters
+						const searchParams = new URLSearchParams();
+						if (firstName) searchParams.set('name', firstName);
+						if (email) searchParams.set('email', email);
+
+						// Redirect to success page with query parameters
+						await goto(`/success?${searchParams.toString()}`);
+					} else {
+						await update();
+					}
 					isSubmitting = false;
 				};
 			}}
 		>
 			<div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-				<!-- Success Message -->
-				<!-- {#if successMessage}
-					<div class="mb-6 rounded-md border border-green-200 bg-green-50 p-4">
-						<div class="flex">
-							<svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-								<path
-									fill-rule="evenodd"
-									d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L7.53 10.75a.75.75 0 00-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-							<div class="ml-3">
-								<p class="text-sm font-medium text-green-800">{successMessage}</p>
-							</div>
-						</div>
-					</div>
-				{/if} -->
-
 				<!-- General Form Error -->
 				<!-- {#if errors._form}
 					<div class="mb-6 rounded-md border border-red-200 bg-red-50 p-4">
@@ -235,7 +230,7 @@
 								required
 								minlength="2"
 								maxlength="50"
-								pattern="[a-zA-Z\s'-]+"
+								pattern="[a-zA-Z\-\s]+"
 								title="First name can only contain letters, spaces, hyphens, and apostrophes"
 								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
 							/>
@@ -255,7 +250,7 @@
 								required
 								minlength="2"
 								maxlength="50"
-								pattern="[a-zA-Z\s'-]+"
+								pattern="[a-zA-Z\-\s]+"
 								title="Last name can only contain letters, spaces, hyphens, and apostrophes"
 								autocomplete="family-name"
 								class="text-body focus:outline-primary-600 block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2"
@@ -290,7 +285,7 @@
 								type="tel"
 								name="phone-number"
 								required
-								pattern={"^\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$"}
+								pattern="([89][0-9]{8})"
 								title="Please enter a valid phone number (7-15 digits, may include +, spaces, hyphens, parentheses, and dots)"
 								placeholder="+1 (555) 123-4567"
 								value={formData['phone-number'] || ''}

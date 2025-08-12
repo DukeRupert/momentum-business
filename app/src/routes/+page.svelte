@@ -9,9 +9,9 @@
 </script>
 
 <Hero />
-<Testimonials />
+<!-- <Testimonials /> -->
 <Features />
 <Cleanup />
 <Faq />
-<Blog />
+<!-- <Blog /> -->
 <CallToAction />

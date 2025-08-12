@@ -1,0 +1,153 @@
+<!-- src/routes/success/+page.svelte -->
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+
+	// Auto-redirect after 30 seconds
+	onMount(() => {
+		const timer = setTimeout(() => {
+			goto('/');
+		}, 30000);
+
+		return () => clearTimeout(timer);
+	});
+
+	// Get query parameters for personalization
+	let firstName = $derived(page.url.searchParams.get('name') || '')
+	let email = $derived(page.url.searchParams.get('email') || '')
+</script>
+
+<svelte:head>
+	<title>Thank You - Message Sent Successfully</title>
+	<meta name="description" content="Your message has been received. We'll get back to you soon." />
+</svelte:head>
+
+<div class="bg-white">
+	<div class="relative isolate overflow-hidden bg-gradient-to-br from-primary-50 to-secondary-50">
+		<!-- Background pattern -->
+		<div
+			class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+			aria-hidden="true"
+		>
+			<div
+				class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-primary-200 to-secondary-300 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+				style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+			></div>
+		</div>
+
+		<div class="mx-auto max-w-2xl px-6 py-32 text-center lg:px-8">
+			<!-- Success Icon -->
+			<div class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
+				<svg
+					class="h-10 w-10 text-primary-600"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M5 13l4 4L19 7"
+					></path>
+				</svg>
+			</div>
+
+			<!-- Success Message -->
+			<h1 class="text-4xl font-bold text-gray-900 sm:text-6xl">
+				Message Sent Successfully!
+			</h1>
+
+			{#if firstName}
+				<p class="mt-6 text-lg text-gray-600">
+					Thank you, <span class="font-semibold text-green-700">{firstName}</span>! We've
+					received your message and will get back to you soon.
+				</p>
+			{:else}
+				<p class="mt-6 text-lg text-gray-600">
+					Thank you for reaching out! We've received your message and will get back to you soon.
+				</p>
+			{/if}
+
+			{#if email}
+				<p class="mt-4 text-sm text-gray-500">
+					A confirmation email has been sent to <span class="font-medium">{email}</span>
+				</p>
+			{/if}
+
+			<!-- What happens next section -->
+			<div class="mt-12 rounded-2xl bg-white/80 p-8 shadow-sm ring-1 ring-gray-900/5 backdrop-blur-sm">
+				<h2 class="text-xl font-semibold text-gray-900">What happens next?</h2>
+				<dl class="mt-6 space-y-4 text-left">
+					<div class="flex gap-x-4">
+						<dt class="flex-none">
+							<div class="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-green-600">
+								<span class="text-sm font-bold">1</span>
+							</div>
+						</dt>
+						<dd class="text-base text-gray-600">
+							<span class="font-semibold text-gray-900">Acknowledgment</span><br />
+							You'll receive a confirmation email within the next few minutes.
+						</dd>
+					</div>
+					<div class="flex gap-x-4">
+						<dt class="flex-none">
+							<div class="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-green-600">
+								<span class="text-sm font-bold">2</span>
+							</div>
+						</dt>
+						<dd class="text-base text-gray-600">
+							<span class="font-semibold text-gray-900">Review</span><br />
+							Our team will carefully review your message and determine the best way to help.
+						</dd>
+					</div>
+					<div class="flex gap-x-4">
+						<dt class="flex-none">
+							<div class="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-green-600">
+								<span class="text-sm font-bold">3</span>
+							</div>
+						</dt>
+						<dd class="text-base text-gray-600">
+							<span class="font-semibold text-gray-900">Response</span><br />
+							We'll get back to you within 1-2 business days with a personalized response.
+						</dd>
+					</div>
+				</dl>
+			</div>
+
+			<!-- Action buttons -->
+			<div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+				<a
+					href="/"
+					class="rounded-md bg-primary-600 px-6 py-3 text-body font-primary-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
+				>
+					Return to Home
+				</a>
+				<a
+					href="/contact"
+					class="rounded-md bg-white px-6 py-3 text-body font-primary-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
+				>
+					Send Another Message
+				</a>
+			</div>
+
+			<!-- Auto redirect notice -->
+			<p class="mt-8 text-caption text-gray-500">
+				You'll be automatically redirected to the homepage in 30 seconds.
+			</p>
+		</div>
+
+		<!-- Bottom background pattern -->
+		<div
+			class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+			aria-hidden="true"
+		>
+			<div
+				class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-secondary-200 to-primary-300 opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+				style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+			></div>
+		</div>
+	</div>
+</div>

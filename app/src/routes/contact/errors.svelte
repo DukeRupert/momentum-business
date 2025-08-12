@@ -14,7 +14,6 @@
 	}
 
 	let { errors = null }: { errors: ZodErrors | null } = $props();
-	$inspect(errors);
 
 	// Helper function to format field names for display
 	function formatFieldName(fieldName: string) {
