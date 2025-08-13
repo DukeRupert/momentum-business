@@ -4,11 +4,11 @@
     description: "Stop losing sleep over QuickBooks and cash flow management. Join hundreds of business owners who've found peace of mind with our expert financial services.",
     primaryButton: {
       text: "Get started today",
-      href: "#"
+      href: "/contact"
     },
     secondaryButton: {
       text: "View our packages",
-      href: "#"
+      href: "/services"
     }
   };
 </script>
