@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Hero from '$lib/hero.svelte';
 	import Features from '$lib/features.svelte';
-	import Testimonials from '$lib/testimonials.svelte';
+	// import Testimonials from '$lib/testimonials.svelte';
 	import Cleanup from '$lib/cleanup.svelte';
 	import Faq from '$lib/faq.svelte';
-	import Blog from '$lib/blog.svelte';
+	// import Blog from '$lib/blog.svelte';
 	import CallToAction from '$lib/cta.svelte';
+	import type { PageProps } from './$types';
 
 	// Get SEO data from load function
     let { data }: PageProps = $props();
@@ -48,16 +49,12 @@
 
     <!-- Structured Data -->
     {@html `<script type="application/ld+json">${JSON.stringify(structuredData)}</script>`}
-    
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </svelte:head>
 
 <Hero />
+<Cleanup />
 <!-- <Testimonials /> -->
 <Features />
-<Cleanup />
 <Faq />
 <!-- <Blog /> -->
 <CallToAction />

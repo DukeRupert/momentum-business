@@ -74,11 +74,11 @@
 				</div>
 			</div>
 			<div class="flex items-start justify-end lg:order-first">
-				<img
-					alt="Product screenshot"
-					src="https://as2.ftcdn.net/v2/jpg/10/58/87/61/1000_F_1058876100_ZN9yjJLPq3jODb1YCRFLPTcTs48siq3V.jpg"
-					width={2432}
-					height={1442}
+				<enhanced:img
+					alt="accounting quick books"
+					src="/static/img/AdobeStock_1058876100.jpeg"
+					width=6100
+					height=3419
 					class="w-3xl sm:w-228 max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10"
 				/>
 			</div>
