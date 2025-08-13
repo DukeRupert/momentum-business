@@ -1,4 +1,5 @@
 <script>
+	import Seo from '$lib/seo.svelte';
 	import SectionHeader from '$lib/header.svelte';
 	import Cleanup from '$lib/cleanup.svelte';
 	import Premium from '$lib/premium.svelte';
@@ -72,6 +73,13 @@
 		}
 	];
 </script>
+
+<!-- Simple SEO tags -->
+<Seo
+	title="Services & Pricing"
+	description="Monthly bookkeeping packages starting at $750/month. QuickBooks setup, payroll processing, and financial consulting for growing businesses. Based in Richland, WA."
+	canonical="/services"
+/>
 
 <!-- Page Header -->
 <SectionHeader
@@ -173,7 +181,6 @@
 					</div>
 				</div>
 			{/each}
-			
 		</div>
 		<Consulting />
 	</div>

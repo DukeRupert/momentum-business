@@ -1,4 +1,5 @@
 <script>
+	import Seo from '$lib/seo.svelte';
 	import SectionHeader from '$lib/header.svelte';
 	import MissionStatement from '$lib/mission.svelte';
 	import TeamSection from '$lib/team.svelte';
@@ -30,6 +31,13 @@
 		]
 	};
 </script>
+
+<!-- Simple SEO tags -->
+<Seo 
+    title="About Us"
+    description="Meet Cade Maldonado, QuickBooks ProAdvisor and founder of Momentum Business Solutions. Helping Tri-Cities businesses with expert financial management since 2020."
+    canonical="/about"
+/>
 
 <!-- Page Header -->
 <SectionHeader

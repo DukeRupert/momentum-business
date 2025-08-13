@@ -3,7 +3,7 @@ import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { join } from "path";
 
-const path_to_layout = join(import.meta.dirname, "./src/routes/posts/layout.svelte");
+const path_to_layout = join(import.meta.dirname, "./src/routes/posts/blogLayout.svelte");
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

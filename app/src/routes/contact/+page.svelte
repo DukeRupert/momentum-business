@@ -5,6 +5,7 @@
 	import { enhance } from '$app/forms';
 	import Errors from './errors.svelte';
 	import { goto } from '$app/navigation';
+	import Seo from '$lib/seo.svelte';
 
 	let { params, data: formData, form }: PageProps = $props();
 
@@ -38,6 +39,13 @@
 		}
 	});
 </script>
+
+<!-- Simple SEO tags -->
+<Seo
+    title="Contact Us"
+    description="Get in touch with Momentum Business Solutions for a free consultation. Call (509) 554-8022 or email cade@momentumbusiness.org. Based in Richland, WA."
+    canonical="/contact"
+/>
 
 <div class="relative isolate bg-white">
 	<div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">

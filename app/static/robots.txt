@@ -1,3 +1,19 @@
-# allow crawling everything by default
+# Robots.txt for Momentum Business Solutions
 User-agent: *
-Disallow:
+Allow: /
+
+# Important pages for crawling
+Allow: /services
+Allow: /about  
+Allow: /contact
+Allow: /posts/
+
+# Block any admin or sensitive areas (add as needed)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Sitemap location
+Sitemap: https://momentumbusiness.org/sitemap.xml
+
+# Crawl delay (optional - use only if needed)
+# Crawl-delay: 1
