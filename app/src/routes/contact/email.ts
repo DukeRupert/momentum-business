@@ -537,13 +537,6 @@ export async function sendThankYouEmail({
             <p>We understand that managing your business finances can be complex, and we're here to help streamline those processes so you can focus on what you do best – growing your business.</p>
         </div>
 
-        <div class="services-summary">
-            <h3>Services You're Interested In:</h3>
-            ${formData.services.map(service =>
-        `<div class="service-item">${formatServiceForCustomer(service)}</div>`
-    ).join('')}
-        </div>
-
         <div class="timeline-box">
             <h3>What Happens Next?</h3>
             <p><strong>Within 24 hours:</strong> Cade from our team will personally review your submission and reach out to discuss your specific needs and how we can best support your business goals.</p>
