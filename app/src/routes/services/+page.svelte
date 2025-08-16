@@ -131,9 +131,6 @@
 								{service.period}
 							</span>
 						</div>
-						<p class="text-caption text-primary-600 mt-1 font-medium">
-							Estimated Time Commitment: {service.timeCommitment}
-						</p>
 					</div>
 
 					<p class="text-body mb-6 text-gray-600">

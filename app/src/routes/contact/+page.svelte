@@ -379,7 +379,7 @@
 									</div>
 									<label for="service-executive-operations" class="text-body text-gray-700">
 										<span class="font-primary-medium">Executive Operations Package</span>
-										<span class="text-caption block text-gray-500">Starting at $2,000/month</span>
+										<span class="text-caption block text-gray-500">Starting at $2,500/month</span>
 									</label>
 								</div>
 
