@@ -1,5 +1,6 @@
 <script>
   import { fade, fly } from 'svelte/transition';
+  import { page } from '$app/stores';
   import Logo from '$lib/assets/logo_symbol.png';
   
   const navigation = [
@@ -17,6 +18,13 @@
   function closeMobileMenu() {
     mobileMenuOpen = false;
   }
+
+  // Close menu whenever the route changes
+$effect(() => {
+  if ($page) {
+    mobileMenuOpen = false;
+  }
+});
 
   // Close menu when clicking outside
   /**
