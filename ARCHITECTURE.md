@@ -685,3 +685,282 @@ docker compose logs
 1. Check email service API token
 2. Verify FROM_EMAIL is authorized sender
 3. Check container logs for Postmark/SendGrid errors
+
+---
+
+## SvelteKit to Hugo/Go Conversion Guide
+
+When converting an existing SvelteKit codebase (not just a public URL), use this guide.
+
+### File Mapping Reference
+
+| SvelteKit | Hugo/Go |
+|-----------|---------|
+| `src/routes/+page.svelte` | `layouts/index.html` |
+| `src/routes/about/+page.svelte` | `layouts/about/single.html` + `content/about.md` |
+| `src/routes/[slug]/+page.svelte` | `layouts/_default/single.html` |
+| `src/lib/components/*.svelte` | `layouts/partials/*.html` |
+| `src/app.css` | `assets/css/main.css` |
+| `src/routes/api/*/+server.ts` | `api/*.go` |
+| `static/*` | `static/*` |
+| `$lib/assets/*` | `static/*` or `assets/*` |
+
+### Validation Schema: Zod → Go
+
+SvelteKit projects often use Zod for form validation. Convert to Go structs with validation methods:
+
+**Zod (TypeScript):**
+```typescript
+const schema = z.object({
+  firstName: z.string().min(2).max(50).regex(/^[a-zA-Z\s\-']+$/),
+  email: z.string().email().max(254),
+  phone: z.string().regex(/^[\+]?[1-9]?[\d\s\-\(\)\.]{10,15}$/),
+  annualRevenue: z.enum(['under-100k', '100k-500k', '500k-1m']),
+  services: z.array(z.string()).min(1),
+  message: z.string().max(2000).optional(),
+});
+```
+
+**Go equivalent:**
+```go
+type ContactForm struct {
+    FirstName     string   `json:"firstName"`
+    Email         string   `json:"email"`
+    Phone         string   `json:"phoneNumber"`
+    AnnualRevenue string   `json:"annualRevenue"`
+    Services      []string `json:"services"`
+    Message       string   `json:"message"`
+}
+
+var (
+    nameRegex  = regexp.MustCompile(`^[a-zA-Z\s\-']+$`)
+    phoneRegex = regexp.MustCompile(`^[\+]?[1-9]?[\d\s\-\(\)\.]{10,15}$`)
+    emailRegex = regexp.MustCompile(`^[^\s@]+@[^\s@]+\.[^\s@]+$`)
+    validRevenues = []string{"under-100k", "100k-500k", "500k-1m", "1m-5m", "over-5m"}
+)
+
+func (f *ContactForm) Validate() ValidationResult {
+    var errors []ValidationError
+
+    // String length + regex
+    if len(f.FirstName) < 2 || len(f.FirstName) > 50 {
+        errors = append(errors, ValidationError{Field: "firstName", Message: "Must be 2-50 characters"})
+    } else if !nameRegex.MatchString(f.FirstName) {
+        errors = append(errors, ValidationError{Field: "firstName", Message: "Invalid characters"})
+    }
+
+    // Enum validation
+    if !contains(validRevenues, f.AnnualRevenue) {
+        errors = append(errors, ValidationError{Field: "annualRevenue", Message: "Invalid selection"})
+    }
+
+    // Array min length
+    if len(f.Services) < 1 {
+        errors = append(errors, ValidationError{Field: "services", Message: "Select at least one"})
+    }
+
+    return ValidationResult{Valid: len(errors) == 0, Errors: errors}
+}
+```
+
+### Email Templates: TypeScript → Go
+
+SvelteKit email templates use template literals. Convert to Go's `text/template` or `html/template`:
+
+**TypeScript:**
+```typescript
+export function generateEmail(form: FormData): string {
+  return `
+    <h1>New Contact from ${form.firstName}</h1>
+    <p><strong>Email:</strong> ${form.email}</p>
+    <p><strong>Services:</strong> ${form.services.join(', ')}</p>
+  `;
+}
+```
+
+**Go equivalent:**
+```go
+const emailTemplate = `
+<h1>New Contact from {{.FirstName}}</h1>
+<p><strong>Email:</strong> {{.Email}}</p>
+<p><strong>Services:</strong> {{range $i, $s := .Services}}{{if $i}}, {{end}}{{$s}}{{end}}</p>
+`
+
+func GenerateEmail(form *ContactForm) (string, error) {
+    tmpl, err := template.New("email").Parse(emailTemplate)
+    if err != nil {
+        return "", err
+    }
+    var buf bytes.Buffer
+    if err := tmpl.Execute(&buf, form); err != nil {
+        return "", err
+    }
+    return buf.String(), nil
+}
+```
+
+### Svelte Reactivity → Alpine.js
+
+Replace Svelte's reactivity with Alpine.js for interactive components:
+
+**Svelte:**
+```svelte
+<script>
+  let isOpen = false;
+  let formData = { name: '', email: '' };
+
+  async function handleSubmit() {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    });
+  }
+</script>
+
+<button on:click={() => isOpen = !isOpen}>Toggle</button>
+{#if isOpen}
+  <div>Content</div>
+{/if}
+```
+
+**Alpine.js:**
+```html
+<div x-data="{ isOpen: false, formData: { name: '', email: '' } }">
+  <button @click="isOpen = !isOpen">Toggle</button>
+  <div x-show="isOpen" x-transition>Content</div>
+</div>
+
+<script>
+async function handleSubmit(formData) {
+  const res = await fetch('/api/contact', {
+    method: 'POST',
+    body: JSON.stringify(formData)
+  });
+}
+</script>
+```
+
+### Data Extraction Strategy
+
+Move hardcoded data from Svelte components to Hugo data files:
+
+**Svelte (hardcoded in component):**
+```svelte
+<script>
+  const faqs = [
+    { question: "What is...?", answer: "It is..." },
+    { question: "How do I...?", answer: "You can..." }
+  ];
+</script>
+```
+
+**Hugo (data/faq.yaml):**
+```yaml
+items:
+  - question: "What is...?"
+    answer: "It is..."
+  - question: "How do I...?"
+    answer: "You can..."
+```
+
+**Hugo template:**
+```html
+{{ range site.Data.faq.items }}
+<div class="faq-item">
+  <h3>{{ .question }}</h3>
+  <p>{{ .answer }}</p>
+</div>
+{{ end }}
+```
+
+### CSS Migration
+
+SvelteKit's `app.css` can be copied almost directly to Hugo's `assets/css/main.css`:
+
+1. **Keep as-is:**
+   - CSS custom properties (`--color-primary`, `--text-lg`, etc.)
+   - Tailwind `@apply` directives
+   - `@font-face` declarations
+   - Media queries
+
+2. **Remove:**
+   - Svelte-specific `:global()` wrappers (Hugo doesn't need them)
+   - Any `@import` of Svelte component styles
+
+3. **Update:**
+   - Font paths: `$lib/fonts/` → `/fonts/`
+   - Image paths: `$lib/assets/` → `/images/`
+
+### Form Handling Differences
+
+| SvelteKit | Hugo/Go |
+|-----------|---------|
+| Progressive enhancement (works without JS) | Client-side only (simpler) |
+| SuperForms library | Plain fetch() + Alpine.js |
+| Server-side validation in +page.server.ts | Go API handler validation |
+| Form actions with `use:enhance` | JSON POST to /api/contact |
+
+### SEO Improvements During Conversion
+
+Take the opportunity to add SEO features the SvelteKit site may lack:
+
+1. **Structured Data (JSON-LD):**
+   - LocalBusiness schema for homepage
+   - Service schema for service pages
+   - Person schema for team members
+   - FAQPage schema for FAQ sections
+
+2. **Heading Hierarchy:**
+   - Audit all pages for proper h1 → h2 → h3 flow
+   - Fix components that used incorrect heading levels
+
+3. **Accessibility:**
+   - Add ARIA labels to interactive elements
+   - Add `aria-live` regions for form feedback
+   - Ensure proper focus management
+
+### Multi-Origin CORS
+
+Production sites often need multiple origins (www/non-www, .com/.org):
+
+```go
+// Support comma-separated origins
+allowedOriginsStr := os.Getenv("ALLOWED_ORIGINS")
+allowedOrigins := make(map[string]bool)
+for _, origin := range strings.Split(allowedOriginsStr, ",") {
+    origin = strings.TrimSpace(origin)
+    if origin != "" {
+        allowedOrigins[origin] = true
+    }
+}
+
+func corsMiddleware(next http.Handler, allowedOrigins map[string]bool) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        origin := r.Header.Get("Origin")
+        if allowedOrigins[origin] {
+            w.Header().Set("Access-Control-Allow-Origin", origin)
+            w.Header().Set("Vary", "Origin")  // Important for caching
+        }
+        // ... rest of CORS handling
+    })
+}
+```
+
+**.env:**
+```
+ALLOWED_ORIGINS=https://www.example.com,https://example.com,https://www.example.org,https://example.org
+```
+
+### Conversion Checklist
+
+- [ ] **Preserve SvelteKit source** - Move to `/sveltekit/` for reference
+- [ ] **Extract content** - Copy text content to Hugo markdown/data files
+- [ ] **Port CSS** - Copy app.css, remove Svelte-specific syntax
+- [ ] **Convert components** - Svelte → Hugo partials + Alpine.js
+- [ ] **Convert validation** - Zod schema → Go validation
+- [ ] **Convert email templates** - TypeScript → Go templates
+- [ ] **Port static assets** - Images, fonts, favicons
+- [ ] **Add structured data** - JSON-LD for SEO
+- [ ] **Fix heading hierarchy** - Audit accessibility
+- [ ] **Test forms** - Verify validation, CAPTCHA, email delivery
+- [ ] **Configure multi-origin CORS** - All domain variations
