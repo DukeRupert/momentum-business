@@ -1,4 +1,91 @@
 {{ define "main" }}
+<!-- Service Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Bookkeeping and Financial Consulting",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "{{ .Site.Params.businessInfo.name | default "Momentum Business Solutions, LLC" }}",
+    "url": "{{ .Site.BaseURL }}",
+    "telephone": "{{ .Site.Params.phone }}",
+    "email": "{{ .Site.Params.email }}"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Bookkeeping Services",
+    "itemListElement": [
+      {{- range $index, $package := site.Data.services.packages }}
+      {{- if $index }},{{ end }}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{ $package.name }}",
+          "description": "{{ $package.description }}"
+        },
+        "price": "{{ $package.price | replaceRE `[^0-9]` `` }}",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "{{ $package.price | replaceRE `[^0-9]` `` }}",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        }
+      }
+      {{- end }},
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{ site.Data.services.premium.title }}",
+          "description": "{{ site.Data.services.premium.description }}"
+        },
+        "price": "2500",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "2500",
+          "priceCurrency": "USD",
+          "unitText": "MONTH"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{ site.Data.services.consulting.title }}",
+          "description": "{{ site.Data.services.consulting.description }}"
+        },
+        "price": "150",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "150",
+          "priceCurrency": "USD",
+          "unitText": "HOUR"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{ site.Data.services.cleanup.title }}",
+          "description": "{{ site.Data.services.cleanup.problem }}"
+        },
+        "price": "750",
+        "priceCurrency": "USD"
+      }
+    ]
+  }
+}
+</script>
+
 <!-- Page Header -->
 {{ partial "section-header.html" (dict
   "title" "Monthly Service Packages"
