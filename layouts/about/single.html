@@ -1,0 +1,19 @@
+{{ define "main" }}
+<!-- Page Header -->
+{{ partial "section-header.html" (dict
+  "title" "About Us"
+  "description" "Learn about our mission to help small businesses achieve financial clarity and confidence."
+) }}
+
+<!-- Mission Statement -->
+{{ partial "mission.html" . }}
+
+<!-- Team Section -->
+{{ partial "team.html" . }}
+
+<!-- Features Grid -->
+{{ partial "features-grid.html" . }}
+
+<!-- CTA -->
+{{ partial "cta.html" . }}
+{{ end }}

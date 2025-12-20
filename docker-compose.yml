@@ -1,0 +1,12 @@
+services:
+  web:
+    image: ${DOCKER_IMAGE:-dukerupert/momentum-business:latest}
+    ports:
+      - "${LISTEN_PORT:-8082}:80"
+    environment:
+      - PORT=80
+      - POSTMARK_TOKEN=${POSTMARK_TOKEN}
+      - POSTMARK_TO=${POSTMARK_TO}
+      - POSTMARK_FROM=${POSTMARK_FROM}
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN}
+    restart: unless-stopped

@@ -1,0 +1,53 @@
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
+    <div id="faq" class="mx-auto max-w-4xl">
+      <h2 class="text-headline-lg font-display-semibold sm:text-display-sm tracking-tight text-gray-900">
+        {{ site.Data.faq.title }}
+      </h2>
+
+      <dl class="mt-16 divide-y divide-gray-900/10">
+        {{ range site.Data.faq.questions }}
+          <div class="py-6 first:pt-0 last:pb-0">
+            <details class="group">
+              <summary class="flex w-full cursor-pointer list-none items-start justify-between text-left text-gray-900">
+                <span class="text-body font-primary-semibold pr-6">
+                  {{ .question }}
+                </span>
+                <span class="ml-6 flex h-7 flex-shrink-0 items-center">
+                  <!-- Plus icon (shown when closed) -->
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                    class="size-6 group-open:hidden"
+                  >
+                    <path d="M12 6v12m6-6H6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <!-- Minus icon (shown when open) -->
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                    class="hidden size-6 group-open:block"
+                  >
+                    <path d="M18 12H6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </summary>
+
+              <dd class="mt-2 pr-12">
+                <p class="text-body text-gray-600">
+                  {{ .answer }}
+                </p>
+              </dd>
+            </details>
+          </div>
+        {{ end }}
+      </dl>
+    </div>
+  </div>
+</div>

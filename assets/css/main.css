@@ -1,0 +1,432 @@
+/* main.css - Momentum Business Solutions */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Custom colors - Everglade (Primary Green) */
+  --color-everglade-50: #f4f9f5;
+  --color-everglade-100: #e6f2e7;
+  --color-everglade-200: #cde5cf;
+  --color-everglade-300: #a6cfab;
+  --color-everglade-400: #77b17e;
+  --color-everglade-500: #53945c;
+  --color-everglade-600: #417848;
+  --color-everglade-700: #35603b;
+  --color-everglade-800: #2e4d33;
+  --color-everglade-900: #27402b;
+  --color-everglade-950: #112214;
+
+  /* Custom colors - Cloud Burst (Secondary Blue) */
+  --color-cloud-burst-50: #f1f5fd;
+  --color-cloud-burst-100: #dfe9fa;
+  --color-cloud-burst-200: #c6d9f7;
+  --color-cloud-burst-300: #9ec1f2;
+  --color-cloud-burst-400: #709fea;
+  --color-cloud-burst-500: #4f7ee2;
+  --color-cloud-burst-600: #3a61d6;
+  --color-cloud-burst-700: #314ec4;
+  --color-cloud-burst-800: #2d41a0;
+  --color-cloud-burst-900: #293a7f;
+
+  /* Primary Theme Colors (Everglade Green) */
+  --primary-50: var(--color-everglade-50);
+  --primary-100: var(--color-everglade-100);
+  --primary-200: var(--color-everglade-200);
+  --primary-300: var(--color-everglade-300);
+  --primary-400: var(--color-everglade-400);
+  --primary-500: var(--color-everglade-500);
+  --primary-600: var(--color-everglade-600);
+  --primary-700: var(--color-everglade-700);
+  --primary-800: var(--color-everglade-800);
+  --primary-900: var(--color-everglade-900);
+  --primary-950: var(--color-everglade-950);
+
+  /* Secondary Theme Colors (Cloud Burst Blue) */
+  --secondary-50: #f1f5fd;
+  --secondary-100: #dfe9fa;
+  --secondary-200: #c6d9f7;
+  --secondary-300: #9ec1f2;
+  --secondary-400: #709fea;
+  --secondary-500: #4f7ee2;
+  --secondary-600: #3a61d6;
+  --secondary-700: #314ec4;
+  --secondary-800: #2d41a0;
+  --secondary-900: #293a7f;
+  --secondary-950: #1e2654;
+
+  /* Typography */
+  --font-primary: 'Manrope', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Traditional Newspaper-Inspired Type Scale */
+  --text-kicker: 0.8125rem;    /* 13px - Small labels, tags */
+  --text-caption: 0.875rem;    /* 14px - Image captions, fine print */
+  --text-body: 1rem;           /* 16px - Body text, default */
+  --text-body-lg: 1.125rem;    /* 18px - Lead paragraphs, emphasis */
+  --text-subhead: 1.25rem;     /* 20px - Subheadings, large body */
+  --text-headline-sm: 1.5rem;  /* 24px - Small headlines */
+  --text-headline: 2rem;       /* 32px - Main headlines */
+  --text-headline-lg: 2.75rem; /* 44px - Large headlines */
+  --text-display-sm: 3.5rem;   /* 56px - Hero headlines */
+  --text-display: 4.5rem;      /* 72px - Banner headlines */
+  --text-display-lg: 6rem;     /* 96px - Masthead, hero displays */
+
+  /* Line Heights - More traditional ratios */
+  --leading-tight: 1.15;    /* Headlines */
+  --leading-snug: 1.25;     /* Subheadings */
+  --leading-normal: 1.45;   /* Body text */
+  --leading-relaxed: 1.55;  /* Large body text */
+  --leading-loose: 1.65;    /* Captions, fine print */
+}
+
+/* Base Typography Setup */
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  font-weight: 400;
+}
+
+/* Traditional Typography Classes */
+
+/* Font Sizes */
+.text-kicker {
+  font-size: var(--text-kicker);
+  line-height: var(--leading-loose);
+}
+
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: var(--leading-loose);
+}
+
+.text-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+}
+
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-relaxed);
+}
+
+.text-subhead {
+  font-size: var(--text-subhead);
+  line-height: var(--leading-snug);
+}
+
+.text-headline-sm {
+  font-size: var(--text-headline-sm);
+  line-height: var(--leading-snug);
+}
+
+.text-headline {
+  font-size: var(--text-headline);
+  line-height: var(--leading-tight);
+}
+
+.text-headline-lg {
+  font-size: var(--text-headline-lg);
+  line-height: var(--leading-tight);
+}
+
+.text-display-sm {
+  font-size: var(--text-display-sm);
+  line-height: var(--leading-tight);
+}
+
+.text-display {
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+}
+
+.text-display-lg {
+  font-size: var(--text-display-lg);
+  line-height: var(--leading-tight);
+}
+
+/* Responsive Typography */
+@media (min-width: 640px) {
+  .sm\:text-subhead {
+    font-size: var(--text-subhead);
+    line-height: var(--leading-snug);
+  }
+
+  .sm\:text-headline-sm {
+    font-size: var(--text-headline-sm);
+    line-height: var(--leading-snug);
+  }
+
+  .sm\:text-headline {
+    font-size: var(--text-headline);
+    line-height: var(--leading-tight);
+  }
+
+  .sm\:text-headline-lg {
+    font-size: var(--text-headline-lg);
+    line-height: var(--leading-tight);
+  }
+
+  .sm\:text-display-sm {
+    font-size: var(--text-display-sm);
+    line-height: var(--leading-tight);
+  }
+
+  .sm\:text-display {
+    font-size: var(--text-display);
+    line-height: var(--leading-tight);
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-headline {
+    font-size: var(--text-headline);
+    line-height: var(--leading-tight);
+  }
+
+  .lg\:text-headline-lg {
+    font-size: var(--text-headline-lg);
+    line-height: var(--leading-tight);
+  }
+
+  .lg\:text-display-sm {
+    font-size: var(--text-display-sm);
+    line-height: var(--leading-tight);
+  }
+
+  .lg\:text-display {
+    font-size: var(--text-display);
+    line-height: var(--leading-tight);
+  }
+}
+
+/* Display/Heading Font Classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+/* Heading defaults to display font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Traditional newspaper hierarchy */
+h1 {
+  font-size: var(--text-display-sm);
+  line-height: var(--leading-tight);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--text-headline-lg);
+  line-height: var(--leading-tight);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--text-headline);
+  line-height: var(--leading-snug);
+  font-weight: 600;
+}
+
+h4 {
+  font-size: var(--text-headline-sm);
+  line-height: var(--leading-snug);
+  font-weight: 600;
+}
+
+h5 {
+  font-size: var(--text-subhead);
+  line-height: var(--leading-snug);
+  font-weight: 500;
+}
+
+h6 {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-normal);
+  font-weight: 500;
+}
+
+/* Override for specific heading weights */
+.font-display-medium {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.font-display-semibold {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.font-display-bold {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.font-display-extrabold {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* Primary font weight variants */
+.font-primary-normal {
+  font-family: var(--font-primary);
+  font-weight: 400;
+}
+
+.font-primary-medium {
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+.font-primary-semibold {
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+.font-primary-bold {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+/* Color utility classes - Primary (Everglade Green) */
+.bg-primary-50 {
+  background-color: var(--primary-50);
+}
+
+.bg-primary-100 {
+  background-color: var(--primary-100);
+}
+
+.bg-primary-200 {
+  background-color: var(--primary-200);
+}
+
+.bg-primary-500 {
+  background-color: var(--primary-500);
+}
+
+.bg-primary-600 {
+  background-color: var(--primary-600);
+}
+
+.bg-primary-700 {
+  background-color: var(--primary-700);
+}
+
+/* Color utility classes - Secondary (Cloud Burst Blue) */
+.bg-secondary-50 {
+  background-color: var(--secondary-50);
+}
+
+.bg-secondary-100 {
+  background-color: var(--secondary-100);
+}
+
+.bg-secondary-200 {
+  background-color: var(--secondary-200);
+}
+
+.bg-secondary-500 {
+  background-color: var(--secondary-500);
+}
+
+.bg-secondary-600 {
+  background-color: var(--secondary-600);
+}
+
+.bg-secondary-700 {
+  background-color: var(--secondary-700);
+}
+
+/* Text colors */
+.text-primary-200 {
+  color: var(--primary-200);
+}
+
+.text-primary-500 {
+  color: var(--primary-500);
+}
+
+.text-primary-600 {
+  color: var(--primary-600);
+}
+
+.text-primary-700 {
+  color: var(--primary-700);
+}
+
+.text-secondary-600 {
+  color: var(--secondary-600);
+}
+
+/* Border colors */
+.border-primary-500 {
+  border-color: var(--primary-500);
+}
+
+.border-primary-600 {
+  border-color: var(--primary-600);
+}
+
+/* Ring colors */
+.ring-primary-600 {
+  --tw-ring-color: var(--primary-600);
+}
+
+/* Hover states */
+.hover\:bg-primary-50:hover {
+  background-color: var(--primary-50);
+}
+
+.hover\:bg-primary-500:hover {
+  background-color: var(--primary-500);
+}
+
+.hover\:text-primary-500:hover {
+  color: var(--primary-500);
+}
+
+/* Focus states */
+.focus-visible\:outline-primary-600:focus-visible {
+  outline-color: var(--primary-600);
+}
+
+.focus\:ring-primary-600:focus {
+  --tw-ring-color: var(--primary-600);
+}
+
+/* FAQ Accordion Styles */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::marker {
+  content: '';
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+details[open] dd {
+  animation: slideDown 0.2s ease-out;
+}

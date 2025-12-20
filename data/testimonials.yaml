@@ -1,0 +1,11 @@
+# Testimonials - Add real client testimonials here
+# Structure:
+#
+# testimonials:
+#   - name: "Client Name"
+#     role: "Title, Company"
+#     quote: "Their testimonial quote goes here..."
+#     image: "/images/testimonials/client-photo.jpg"
+#     company_logo: "/images/logos/company-logo.png"  # optional
+
+testimonials: []

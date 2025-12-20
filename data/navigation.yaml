@@ -1,0 +1,17 @@
+main:
+  - name: Services
+    href: /services
+  - name: About
+    href: /about
+  - name: Contact
+    href: /contact
+
+footer:
+  - name: Services
+    href: /services
+  - name: About
+    href: /about
+  - name: Contact
+    href: /contact
+  - name: Privacy
+    href: /privacy
