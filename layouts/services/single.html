@@ -92,6 +92,29 @@
   "description" "Comprehensive financial solutions designed to give you clarity, confidence, and peace of mind so you can focus on growing your business."
 ) }}
 
+<!-- Anchor Navigation -->
+<nav aria-label="Services navigation" class="bg-white border-b border-gray-200 sticky top-0 z-30">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="flex items-center justify-center gap-x-1 sm:gap-x-2 py-3 overflow-x-auto">
+      <a href="#essentials" class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+        Essentials
+      </a>
+      <a href="#growth-strategy" class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+        Growth Strategy
+      </a>
+      <a href="#consulting" class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+        Consulting
+      </a>
+      <a href="#complete-support" class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+        Complete Support
+      </a>
+      <a href="#quickbooks-cleanup" class="whitespace-nowrap rounded-full bg-primary-50 px-3 py-1.5 text-sm font-medium text-primary-700 hover:bg-primary-100 transition-colors">
+        Q4 Special
+      </a>
+    </div>
+  </div>
+</nav>
+
 <!-- Services Grid -->
 <section class="bg-white py-12 sm:py-24">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -99,7 +122,7 @@
       {{ range site.Data.services.packages }}
         <div
           id="{{ .id }}"
-          class="relative rounded-2xl border border-gray-200 p-8 shadow-sm transition-shadow hover:shadow-md {{ if .popular }}ring-2 ring-primary-600{{ end }}"
+          class="relative rounded-2xl border border-gray-200 p-8 shadow-sm transition-shadow hover:shadow-md scroll-mt-16 {{ if .popular }}ring-2 ring-primary-600{{ end }}"
         >
           {{ if .popular }}
             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
