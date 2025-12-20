@@ -1,4 +1,35 @@
 {{ define "main" }}
+<!-- Structured Data for Contact Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Momentum Business Solutions",
+  "description": "{{ .Description }}",
+  "url": "{{ .Permalink }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.businessInfo.name | default "Momentum Business Solutions, LLC" }}",
+    "telephone": "{{ .Site.Params.phone }}",
+    "email": "{{ .Site.Params.email }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ .Site.Params.address.locality }}",
+      "addressRegion": "{{ .Site.Params.address.region }}",
+      "addressCountry": "{{ .Site.Params.address.country }}"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "{{ .Site.Params.phone }}",
+      "email": "{{ .Site.Params.email }}",
+      "contactType": "customer service",
+      "availableLanguage": "English",
+      "areaServed": "US"
+    }
+  }
+}
+</script>
+
 <div class="relative isolate bg-white" x-data="contactForm()">
   <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
     <!-- Contact Information Side -->
