@@ -4,7 +4,20 @@
 @tailwind utilities;
 
 :root {
-  /* Custom colors - Everglade (Primary Green) */
+  /* Custom colors - Cloud Burst (Primary Blue) */
+  --color-cloud-burst-50: #f1f5fd;
+  --color-cloud-burst-100: #dfe9fa;
+  --color-cloud-burst-200: #c6d9f7;
+  --color-cloud-burst-300: #9ec1f2;
+  --color-cloud-burst-400: #709fea;
+  --color-cloud-burst-500: #4f7ee2;
+  --color-cloud-burst-600: #3a61d6;
+  --color-cloud-burst-700: #314ec4;
+  --color-cloud-burst-800: #2d41a0;
+  --color-cloud-burst-900: #293a7f;
+  --color-cloud-burst-950: #1e2654;
+
+  /* Custom colors - Everglade (Secondary Green) */
   --color-everglade-50: #f4f9f5;
   --color-everglade-100: #e6f2e7;
   --color-everglade-200: #cde5cf;
@@ -17,43 +30,31 @@
   --color-everglade-900: #27402b;
   --color-everglade-950: #112214;
 
-  /* Custom colors - Cloud Burst (Secondary Blue) */
-  --color-cloud-burst-50: #f1f5fd;
-  --color-cloud-burst-100: #dfe9fa;
-  --color-cloud-burst-200: #c6d9f7;
-  --color-cloud-burst-300: #9ec1f2;
-  --color-cloud-burst-400: #709fea;
-  --color-cloud-burst-500: #4f7ee2;
-  --color-cloud-burst-600: #3a61d6;
-  --color-cloud-burst-700: #314ec4;
-  --color-cloud-burst-800: #2d41a0;
-  --color-cloud-burst-900: #293a7f;
+  /* Primary Theme Colors (Cloud Burst Blue) */
+  --primary-50: var(--color-cloud-burst-50);
+  --primary-100: var(--color-cloud-burst-100);
+  --primary-200: var(--color-cloud-burst-200);
+  --primary-300: var(--color-cloud-burst-300);
+  --primary-400: var(--color-cloud-burst-400);
+  --primary-500: var(--color-cloud-burst-500);
+  --primary-600: var(--color-cloud-burst-600);
+  --primary-700: var(--color-cloud-burst-700);
+  --primary-800: var(--color-cloud-burst-800);
+  --primary-900: var(--color-cloud-burst-900);
+  --primary-950: var(--color-cloud-burst-950);
 
-  /* Primary Theme Colors (Everglade Green) */
-  --primary-50: var(--color-everglade-50);
-  --primary-100: var(--color-everglade-100);
-  --primary-200: var(--color-everglade-200);
-  --primary-300: var(--color-everglade-300);
-  --primary-400: var(--color-everglade-400);
-  --primary-500: var(--color-everglade-500);
-  --primary-600: var(--color-everglade-600);
-  --primary-700: var(--color-everglade-700);
-  --primary-800: var(--color-everglade-800);
-  --primary-900: var(--color-everglade-900);
-  --primary-950: var(--color-everglade-950);
-
-  /* Secondary Theme Colors (Cloud Burst Blue) */
-  --secondary-50: #f1f5fd;
-  --secondary-100: #dfe9fa;
-  --secondary-200: #c6d9f7;
-  --secondary-300: #9ec1f2;
-  --secondary-400: #709fea;
-  --secondary-500: #4f7ee2;
-  --secondary-600: #3a61d6;
-  --secondary-700: #314ec4;
-  --secondary-800: #2d41a0;
-  --secondary-900: #293a7f;
-  --secondary-950: #1e2654;
+  /* Secondary Theme Colors (Everglade Green) */
+  --secondary-50: var(--color-everglade-50);
+  --secondary-100: var(--color-everglade-100);
+  --secondary-200: var(--color-everglade-200);
+  --secondary-300: var(--color-everglade-300);
+  --secondary-400: var(--color-everglade-400);
+  --secondary-500: var(--color-everglade-500);
+  --secondary-600: var(--color-everglade-600);
+  --secondary-700: var(--color-everglade-700);
+  --secondary-800: var(--color-everglade-800);
+  --secondary-900: var(--color-everglade-900);
+  --secondary-950: var(--color-everglade-950);
 
   /* Typography */
   --font-primary: 'Manrope', sans-serif;
@@ -300,7 +301,7 @@ h6 {
   font-weight: 700;
 }
 
-/* Color utility classes - Primary (Everglade Green) */
+/* Color utility classes - Primary (Cloud Burst Blue) */
 .bg-primary-50 {
   background-color: var(--primary-50);
 }
@@ -325,7 +326,7 @@ h6 {
   background-color: var(--primary-700);
 }
 
-/* Color utility classes - Secondary (Cloud Burst Blue) */
+/* Color utility classes - Secondary (Everglade Green) */
 .bg-secondary-50 {
   background-color: var(--secondary-50);
 }
