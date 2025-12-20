@@ -1,4 +1,30 @@
 {{ define "main" }}
+<!-- Structured Data for About Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.businessInfo.name | default "Momentum Business Solutions, LLC" }}",
+    "founder": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.founder }}",
+      "jobTitle": "{{ .Site.Params.founderTitle }}",
+      "description": "QuickBooks ProAdvisor Certified with over a decade of financial management experience across corporate and small business settings.",
+      "knowsAbout": ["Bookkeeping", "QuickBooks", "Payroll Processing", "Financial Planning", "Small Business Consulting"],
+      "sameAs": [
+        "{{ .Site.Params.companyLinkedIn }}"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "{{ .Site.Params.businessInfo.name | default "Momentum Business Solutions, LLC" }}"
+      }
+    }
+  }
+}
+</script>
+
 <!-- Page Header -->
 {{ partial "section-header.html" (dict
   "title" "About Us"
