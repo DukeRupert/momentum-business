@@ -1,12 +1,69 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 )
+
+// TurnstileResponse represents Cloudflare's siteverify response
+type TurnstileResponse struct {
+	Success     bool     `json:"success"`
+	ErrorCodes  []string `json:"error-codes,omitempty"`
+	ChallengeTS string   `json:"challenge_ts,omitempty"`
+	Hostname    string   `json:"hostname,omitempty"`
+}
+
+// verifyTurnstile verifies the Turnstile token with Cloudflare
+func verifyTurnstile(token, secretKey, remoteIP string) (bool, error) {
+	if secretKey == "" {
+		log.Println("TURNSTILE_SECRET_KEY not set, skipping verification")
+		return true, nil
+	}
+
+	payload := map[string]string{
+		"secret":   secretKey,
+		"response": token,
+	}
+	if remoteIP != "" {
+		payload["remoteip"] = remoteIP
+	}
+
+	jsonPayload, err := json.Marshal(payload)
+	if err != nil {
+		return false, err
+	}
+
+	resp, err := http.Post(
+		"https://challenges.cloudflare.com/turnstile/v0/siteverify",
+		"application/json",
+		bytes.NewBuffer(jsonPayload),
+	)
+	if err != nil {
+		return false, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return false, err
+	}
+
+	var result TurnstileResponse
+	if err := json.Unmarshal(body, &result); err != nil {
+		return false, err
+	}
+
+	if !result.Success {
+		log.Printf("Turnstile verification failed: %v", result.ErrorCodes)
+	}
+
+	return result.Success, nil
+}
 
 // ContactResponse represents the response from the contact endpoint
 type ContactResponse struct {
@@ -36,6 +93,52 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 			Error:   "Invalid request body",
 		})
 		return
+	}
+
+	// Check honeypot field - if filled, it's a bot
+	// Return fake success to not alert the bot
+	if strings.TrimSpace(form.Website) != "" {
+		log.Printf("Honeypot triggered - likely bot submission from IP: %s", r.RemoteAddr)
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(ContactResponse{
+			Success: true,
+			Message: "Message sent successfully",
+		})
+		return
+	}
+
+	// Verify Turnstile token
+	turnstileSecret := os.Getenv("TURNSTILE_SECRET_KEY")
+	if form.TurnstileResponse == "" && turnstileSecret != "" {
+		log.Printf("Missing Turnstile token from IP: %s", r.RemoteAddr)
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(ContactResponse{
+			Success: false,
+			Error:   "Please complete the security check",
+		})
+		return
+	}
+
+	if turnstileSecret != "" {
+		verified, err := verifyTurnstile(form.TurnstileResponse, turnstileSecret, r.RemoteAddr)
+		if err != nil {
+			log.Printf("Turnstile verification error: %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(ContactResponse{
+				Success: false,
+				Error:   "Security verification failed. Please try again.",
+			})
+			return
+		}
+		if !verified {
+			log.Printf("Turnstile verification failed for IP: %s", r.RemoteAddr)
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(ContactResponse{
+				Success: false,
+				Error:   "Security check failed. Please try again.",
+			})
+			return
+		}
 	}
 
 	// Trim whitespace from all string fields

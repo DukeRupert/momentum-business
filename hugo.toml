@@ -23,6 +23,12 @@ title = 'Momentum Business Solutions'
     width = 1200
     height = 630
 
+  # Cloudflare Turnstile - replace with your actual site key
+  # Test keys: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+  # Visible: 1x00000000000000000000AA (always passes)
+  # Invisible: 1x00000000000000000000BB (always passes)
+  turnstileSiteKey = '1x00000000000000000000AA'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

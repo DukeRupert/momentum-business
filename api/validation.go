@@ -7,13 +7,15 @@ import (
 
 // ContactForm represents the contact form submission
 type ContactForm struct {
-	FirstName     string   `json:"first-name"`
-	LastName      string   `json:"last-name"`
-	Email         string   `json:"email"`
-	PhoneNumber   string   `json:"phone-number"`
-	AnnualRevenue string   `json:"annual-revenue"`
-	Services      []string `json:"services"`
-	Message       string   `json:"message"`
+	FirstName         string   `json:"first-name"`
+	LastName          string   `json:"last-name"`
+	Email             string   `json:"email"`
+	PhoneNumber       string   `json:"phone-number"`
+	AnnualRevenue     string   `json:"annual-revenue"`
+	Services          []string `json:"services"`
+	Message           string   `json:"message"`
+	Website           string   `json:"website"`              // Honeypot field
+	TurnstileResponse string   `json:"cf-turnstile-response"` // Cloudflare Turnstile token
 }
 
 // ValidationError represents a validation error

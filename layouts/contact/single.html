@@ -353,6 +353,30 @@
               ></textarea>
             </div>
           </div>
+
+          <!-- Honeypot field - hidden from users, catches bots -->
+          <div class="hidden" aria-hidden="true">
+            <label for="website">Website</label>
+            <input
+              type="text"
+              name="website"
+              id="website"
+              x-model="formData.website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Cloudflare Turnstile -->
+          <div class="sm:col-span-2">
+            <div
+              class="cf-turnstile"
+              data-sitekey="{{ site.Params.turnstileSiteKey }}"
+              data-callback="onTurnstileSuccess"
+              data-theme="light"
+            ></div>
+            <p x-show="turnstileError" class="mt-2 text-sm text-red-600" x-text="turnstileError"></p>
+          </div>
         </div>
 
         <div class="mt-10">
@@ -383,7 +407,16 @@
   </div>
 </div>
 
+<!-- Cloudflare Turnstile Script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <script>
+  // Global callback for Turnstile
+  let turnstileToken = '';
+  function onTurnstileSuccess(token) {
+    turnstileToken = token;
+  }
+
   function contactForm() {
     return {
       formData: {
@@ -393,10 +426,12 @@
         phoneNumber: '',
         annualRevenue: '',
         services: [],
-        message: ''
+        message: '',
+        website: '' // Honeypot field
       },
       isSubmitting: false,
       formError: '',
+      turnstileError: '',
 
       init() {
         // Check for pre-selected service from URL params
@@ -423,6 +458,14 @@
       async submitForm() {
         this.isSubmitting = true;
         this.formError = '';
+        this.turnstileError = '';
+
+        // Check Turnstile token
+        if (!turnstileToken) {
+          this.turnstileError = 'Please complete the security check';
+          this.isSubmitting = false;
+          return;
+        }
 
         try {
           const response = await fetch('/api/contact', {
@@ -437,7 +480,9 @@
               'phone-number': this.formData.phoneNumber,
               'annual-revenue': this.formData.annualRevenue,
               'services': this.formData.services,
-              'message': this.formData.message
+              'message': this.formData.message,
+              'website': this.formData.website, // Honeypot
+              'cf-turnstile-response': turnstileToken
             })
           });
 
@@ -451,9 +496,19 @@
             window.location.href = `/success?${params.toString()}`;
           } else {
             this.formError = result.error || 'Something went wrong. Please try again.';
+            // Reset Turnstile on error
+            if (typeof turnstile !== 'undefined') {
+              turnstile.reset();
+              turnstileToken = '';
+            }
           }
         } catch (error) {
           this.formError = 'Unable to submit form. Please try again later.';
+          // Reset Turnstile on error
+          if (typeof turnstile !== 'undefined') {
+            turnstile.reset();
+            turnstileToken = '';
+          }
         } finally {
           this.isSubmitting = false;
         }
