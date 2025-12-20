@@ -1,11 +1,13 @@
-# Testimonials - Add real client testimonials here
-# Structure:
-#
-# testimonials:
-#   - name: "Client Name"
-#     role: "Title, Company"
-#     quote: "Their testimonial quote goes here..."
-#     image: "/images/testimonials/client-photo.jpg"
-#     company_logo: "/images/logos/company-logo.png"  # optional
+# Testimonials - Replace with real client testimonials
+testimonials:
+  - name: "Sarah Mitchell"
+    role: "Owner, Mitchell's Landscaping"
+    quote: "Before working with Cade, I was spending hours every week trying to reconcile my books. Now I can focus on growing my business while knowing my finances are in expert hands. The monthly reports give me clarity I never had before."
 
-testimonials: []
+  - name: "David Chen"
+    role: "CEO, Pacific Northwest Contractors"
+    quote: "The payroll processing alone has saved us countless headaches. Cade's team handles everything from tax filings to direct deposits. It's like having a CFO without the full-time cost."
+
+  - name: "Jennifer Adams"
+    role: "Founder, Adams Consulting Group"
+    quote: "Cade helped us clean up three years of messy QuickBooks data in just two weeks. His strategic financial consulting has been invaluable for planning our expansion. Highly recommend!"
