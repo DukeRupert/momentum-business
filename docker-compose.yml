@@ -5,8 +5,9 @@ services:
       - "${LISTEN_PORT:-8082}:80"
     environment:
       - PORT=80
+      - TURNSTILE_SECRET_KEY=${TURNSTILE_SECRET_KEY}
       - POSTMARK_TOKEN=${POSTMARK_TOKEN}
       - POSTMARK_TO=${POSTMARK_TO}
       - POSTMARK_FROM=${POSTMARK_FROM}
-      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
     restart: unless-stopped
