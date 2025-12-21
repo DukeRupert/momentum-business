@@ -9,7 +9,8 @@ import (
 
 func main() {
 	// Get configuration from environment
-	port := os.Getenv("PORT")
+	// Use API_PORT to avoid conflict with Caddy's PORT
+	port := os.Getenv("API_PORT")
 	if port == "" {
 		port = "8080"
 	}
