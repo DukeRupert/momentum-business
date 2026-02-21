@@ -66,12 +66,17 @@
         <div class="relative rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-sm">
           <div class="absolute -inset-px rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10"></div>
           <div class="relative rounded-2xl bg-white/80 backdrop-blur-sm p-2">
-            <img
-              src="/images/AdobeStock_1201479001.jpeg"
-              alt="Financial charts and graphs including bar charts and pie charts in a modern 3D style"
-              class="w-full h-auto rounded-xl shadow-2xl ring-1 ring-gray-900/10"
-              loading="lazy"
-            />
+            <picture>
+              <source srcset="/images/AdobeStock_1201479001.webp" type="image/webp" />
+              <img
+                src="/images/AdobeStock_1201479001.jpeg"
+                alt="Financial charts and graphs including bar charts and pie charts in a modern 3D style"
+                class="w-full h-auto rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+                width="1280"
+                height="853"
+                loading="lazy"
+              />
+            </picture>
           </div>
         </div>
 
