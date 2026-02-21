@@ -28,57 +28,45 @@ docker compose logs     # View logs
 
 ### Tech Stack
 - **Static Site**: Hugo with Go templates
-- **Styling**: Tailwind CSS v3 with custom typography system
-- **API**: Go HTTP server for contact form
-- **Deployment**: Docker (multi-stage build) + Caddy
+- **Styling**: Tailwind CSS v3 (`tailwind.config.js` scans `layouts/` and `content/`) with custom typography system
+- **Interactivity**: Alpine.js (loaded via CDN in `baseof.html`)
+- **API**: Go 1.21 HTTP server (stdlib only, no external deps) for contact form
+- **Deployment**: Docker (multi-stage build) with Caddy reverse proxy
 - **Email**: Postmark for transactional emails
+- **Bot Protection**: Cloudflare Turnstile (site key in `hugo.toml`, secret key in env)
+- **Analytics**: Plausible (self-hosted at plausible.angmar.dev)
 
-### Project Structure
-```
-├── api/                     # Go API backend
-│   ├── main.go              # HTTP server, CORS middleware
-│   ├── handlers.go          # Contact form handler
-│   ├── validation.go        # Form validation logic
-│   └── email.go             # Postmark email templates
-├── assets/css/main.css      # Tailwind + custom typography
-├── content/                 # Hugo content (markdown)
-│   ├── _index.md            # Homepage
-│   ├── about.md, services.md, contact.md, privacy.md, success.md
-├── data/                    # Structured content
-│   ├── services.yaml        # Service packages & pricing
-│   ├── faq.yaml             # FAQ content
-│   ├── navigation.yaml      # Nav structure
-│   └── team.yaml            # Team members
-├── layouts/
-│   ├── _default/baseof.html # Base template with Alpine.js
-│   ├── partials/            # Reusable components
-│   │   ├── head.html, header.html, footer.html
-│   │   ├── hero.html, features.html, faq.html, cta.html
-│   │   ├── cleanup.html, premium.html, consulting.html
-│   │   └── mission.html, team.html
-│   ├── index.html           # Homepage layout
-│   ├── about/, services/, contact/, success/  # Page layouts
-├── static/                  # Static assets (images, favicons)
-├── hugo.toml                # Hugo configuration
-├── Dockerfile               # Multi-stage build
-├── Caddyfile                # Caddy reverse proxy config
-└── docker-compose.yml       # Container orchestration
-```
+### Key Directories
+- `api/` - Go API backend (main.go, handlers.go, validation.go, email.go)
+- `assets/css/main.css` - Tailwind base + custom typography system
+- `content/` - Hugo markdown content pages
+- `data/` - Structured YAML content (services, FAQ, navigation, team, testimonials)
+- `layouts/` - Hugo Go templates (`_default/baseof.html` is the base, `partials/` has reusable components)
+- `static/` - Static assets (images, favicons)
 
 ### Custom Typography System
 
-The site uses a newspaper-inspired type scale defined in `assets/css/main.css`:
+Defined in `assets/css/main.css` with a newspaper-inspired type scale:
 - Custom font classes: `.text-kicker`, `.text-caption`, `.text-body`, `.text-subhead`, `.text-headline-*`, `.text-display-*`
 - Two font families: `--font-primary` (Manrope) for body, `--font-display` (Outfit) for headings
-- Color palette: `--primary-*` (everglade green) and `--secondary-*` (cloud-burst blue)
+- Color palette: `--primary-*` (cloud-burst blue) and `--secondary-*` (everglade green)
+- Custom color utility classes (`.bg-primary-*`, `.text-primary-*`, etc.) since these are CSS custom properties not in the Tailwind config
 
 ### Contact Form Flow
 
 1. User submits form on `/contact` (Alpine.js handles client-side)
-2. POST to `/api/contact` (Go API)
-3. Go validates with custom validation rules matching original Zod schema
-4. On success: sends notification to business owner + thank-you email to user via Postmark
-5. Client-side redirect to `/success?name=...&email=...`
+2. Honeypot field (`website`) silently rejects bots with a fake success response
+3. Cloudflare Turnstile token verified server-side
+4. POST to `/api/contact` with Go validation (regex patterns for name/email/phone, enum checks for revenue/services)
+5. On success: sends notification email to business owner + thank-you email to user via Postmark
+6. Client-side redirects to `/success?name=...&email=...`
+
+### Docker Architecture
+
+Single container runs both Caddy and the Go API via `docker-entrypoint.sh`:
+- Go API starts as a background process on port 8080
+- Caddy runs in foreground, reverse-proxies `/api/*` to the Go API, serves Hugo static files from `/srv`
+- Multi-stage build: Hugo (hugomods/hugo:exts) → Go compile → Caddy final image
 
 ### Environment Variables
 
@@ -87,19 +75,11 @@ Required in `.env` for production:
 POSTMARK_TOKEN=xxx           # Postmark API token
 POSTMARK_TO=cade@momentumbusiness.org
 POSTMARK_FROM=noreply@momentumbusiness.org
-ALLOWED_ORIGIN=https://www.momentumbusiness.org
+ALLOWED_ORIGINS=https://www.momentumbusiness.org  # Comma-separated, defaults to http://localhost:1313
+TURNSTILE_SECRET_KEY=xxx     # Cloudflare Turnstile secret (skips verification if unset)
+API_PORT=8080                # Go API port (defaults to 8080, use to avoid conflicts)
 ```
 
 ### Deployment
 
-The site deploys via GitHub Actions to a VPS:
-1. Push to `main` triggers build
-2. Docker multi-stage build: Hugo → Go → Caddy
-3. Image pushed to Docker Hub
-4. SSH deploy pulls and restarts container
-
-See `ARCHITECTURE.md` for detailed deployment documentation.
-
-### Reference Files
-
-The original SvelteKit implementation is preserved in `/sveltekit/` for reference during transition.
+GitHub Actions (`.github/workflows/deploy.yml`): push to `main` → Docker build → push to Docker Hub → SSH deploy to VPS at `/opt/momentum-business`.
