@@ -15,7 +15,7 @@ packages:
       - "Email support (48-72 hr response time)"
     bestFor: "Solo operators or small teams looking for reliable, organized books."
     popular: false
-    ctaText: "Get Started"
+    ctaText: "Choose This Plan"
     ctaHref: "/contact?service=essentials"
 
   - id: growth-strategy
@@ -36,7 +36,7 @@ packages:
       - "Priority email support (24-48 hr response time)"
     bestFor: "Businesses ready to scale with a proactive financial partner."
     popular: true
-    ctaText: "Most Popular"
+    ctaText: "Choose This Plan"
     ctaHref: "/contact?service=growthStrategy"
 
 processSteps:
@@ -88,9 +88,9 @@ consulting:
       description: "Optimizing income, expenses, and working capital"
     - title: "Business Strategy & Performance Review"
       description: "Identifying opportunities to scale efficiently"
-  ctaText: "Book a Session Today"
+  ctaText: "Schedule a Consulting Session"
   ctaHref: "/contact?service=consulting"
-  closingMessage: "Book a session today to gain clarity on your business finances and take control of your company's financial future!"
+  closingMessage: "Gain clarity on your finances and make confident decisions with expert guidance."
 
 cleanup:
   badge: "Special Offer"
