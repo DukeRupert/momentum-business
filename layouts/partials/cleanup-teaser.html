@@ -1,0 +1,37 @@
+<section class="bg-gray-50 py-16 sm:py-20">
+  <div class="mx-auto max-w-3xl px-6 lg:px-8 text-center">
+    <!-- Badge -->
+    <div class="mb-6 inline-flex items-center rounded-full border-2 border-primary-500 px-5 py-1.5">
+      <span class="text-kicker font-primary-semibold text-primary-600 uppercase tracking-wide">
+        {{ site.Data.services.cleanup.badge }}
+      </span>
+    </div>
+
+    <h2 class="text-headline font-display-bold tracking-tight text-gray-900 sm:text-headline-lg">
+      {{ site.Data.services.cleanup.title }}
+    </h2>
+
+    <p class="mt-4 text-body-lg text-gray-600">
+      {{ site.Data.services.cleanup.problem }}
+    </p>
+
+    <!-- Price + timeframe -->
+    <div class="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-6">
+      <div class="flex items-baseline gap-1">
+        <span class="text-headline font-display-bold text-gray-900">{{ site.Data.services.cleanup.price }}</span>
+        <span class="text-body text-gray-600">{{ site.Data.services.cleanup.priceLabel }}</span>
+      </div>
+      <span class="hidden sm:inline text-gray-300">|</span>
+      <p class="text-body text-gray-600">Most completed within {{ site.Data.services.cleanup.completionTime }}</p>
+    </div>
+
+    <div class="mt-8">
+      <a
+        href="/services#quickbooks-cleanup"
+        class="inline-flex items-center gap-2 text-body font-primary-semibold text-primary-600 hover:text-primary-500 transition-colors"
+      >
+        Learn More <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>

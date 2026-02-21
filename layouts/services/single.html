@@ -109,7 +109,7 @@
         Complete Support
       </a>
       <a href="#quickbooks-cleanup" class="whitespace-nowrap rounded-full bg-primary-50 px-3 py-1.5 text-sm font-medium text-primary-700 hover:bg-primary-100 transition-colors">
-        Q4 Special
+        Cleanup Special
       </a>
     </div>
   </div>
@@ -154,6 +154,10 @@
               </span>
             </div>
           </div>
+
+          {{ with .tagline }}
+            <p class="mb-3 text-body italic text-gray-700">{{ . }}</p>
+          {{ end }}
 
           <p class="mb-6 text-body text-gray-600">
             {{ .description }}

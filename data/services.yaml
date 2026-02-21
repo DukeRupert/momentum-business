@@ -5,6 +5,7 @@ packages:
     price: "$750"
     period: "/month"
     timeCommitment: "2-3 hours/month"
+    tagline: "Always know where your money stands."
     description: "For businesses that need clean, accurate financials and basic insights."
     features:
       - "Monthly bookkeeping and account reconciliation (up to 3 bank/credit accounts)"
@@ -23,6 +24,7 @@ packages:
     price: "$1,250"
     period: "/month"
     timeCommitment: "4-6 hours/month"
+    tagline: "A financial co-pilot for your next stage of growth."
     description: "For growing businesses that want financial strategy and light HR support."
     features:
       - "Everything in Tier 1, plus:"
@@ -91,7 +93,7 @@ consulting:
   closingMessage: "Book a session today to gain clarity on your business finances and take control of your company's financial future!"
 
 cleanup:
-  badge: "Q4 2025 Special"
+  badge: "Special Offer"
   title: "QuickBooks Online Cleanup Service"
   problem: "If your QuickBooks file is disorganized, inaccurate, or behind - it's costing you more than you think."
   solution: "At Momentum Business Solutions, we specialize in QuickBooks Online cleanup to give you accurate books, clear financial visibility, and peace of mind - fast. Whether you're gearing up for tax season, applying for a loan, or just tired of guessing your numbers, we're here to help."
