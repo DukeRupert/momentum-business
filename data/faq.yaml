@@ -1,16 +1,72 @@
-title: "Frequently asked questions"
+title: "Frequently Asked Questions"
+
 questions:
-  - question: "What industries do you serve?"
-    answer: "We work with service-based and product-based businesses - including real estate, retail, creatives, contractors, and more."
+  # --- Homepage FAQ (Top 6) ---
+
+  - question: "How much does a bookkeeper cost for a small business?"
+    homepage: true
+    answer: 'Monthly bookkeeping costs vary depending on the number of accounts, transaction volume, and how much strategic support you need. At Momentum, our packages start at $750/month for core bookkeeping and go up to $2,500+/month for full CFO-level support. We publish our pricing on our <a href="/services" class="text-primary-600 underline hover:text-primary-500">services page</a> because we believe you should know what to expect before you ever pick up the phone.'
+
+  - question: "What's the difference between a bookkeeper and a CPA?"
+    homepage: true
+    answer: "A CPA (Certified Public Accountant) typically focuses on tax preparation, auditing, and compliance. A bookkeeper handles the day-to-day financial recordkeeping — categorizing transactions, reconciling accounts, running payroll, and producing the monthly reports your CPA needs at tax time. Think of it this way: we keep your books clean all year so your CPA can do their job efficiently when tax season arrives."
+
+  - question: "How do I know if my QuickBooks is set up wrong?"
+    homepage: true
+    answer: 'Common signs include: reports that don''t match your bank statements, uncategorized transactions piling up, duplicate entries, or a chart of accounts that''s confusing and overgrown. If you find yourself avoiding QuickBooks because it feels like a mess, that''s usually a sign. We offer a <a href="/services#cleanup" class="text-primary-600 underline hover:text-primary-500">QuickBooks cleanup service</a> that can get your file organized and accurate, typically within 7-10 business days.'
+
+  - question: "When should a small business hire a bookkeeper?"
+    homepage: true
+    answer: "If you're spending more than a few hours a week on your books, making financial decisions based on guesswork, or dreading tax season because your records are behind — it's time. Most of our clients are generating $500K to $5M in annual revenue and have reached the point where managing finances is pulling them away from running their business."
+
+  - question: "What happens if my books are behind by a year?"
+    homepage: true
+    answer: "It happens more than you'd think, and it's fixable. We'll assess the state of your books, reconcile your accounts, categorize your transactions, and get everything current. Depending on the volume, this can typically be completed within a few weeks. The important thing is to start — the longer messy books sit, the harder and more expensive they become to clean up."
+
+  - question: "Can a bookkeeper help me with taxes?"
+    homepage: true
+    answer: "We don't prepare tax returns — that's your CPA's job. But we make their job significantly easier and potentially less expensive by keeping your books accurate and tax-ready throughout the year. That means clean financial statements, properly categorized expenses, reconciled accounts, and organized records. Many of our clients tell us their CPA bills went down after they started working with us."
+
+  # --- Additional FAQ Page Questions ---
+
+  - question: "How does outsourced bookkeeping actually work?"
+    answer: "Everything happens remotely through secure cloud-based tools. We connect to your QuickBooks Online account, your bank feeds, and any other financial systems you use. Each month we categorize transactions, reconcile your accounts, run payroll if applicable, and deliver financial reports. We communicate by email, phone, or video call — whichever you prefer. Most clients tell us it feels like having someone in-house without the overhead."
+
+  - question: "What does a fractional CFO do for a small business?"
+    answer: 'A fractional CFO gives you strategic financial guidance without the cost of a full-time hire. That includes things like cash flow forecasting, budgeting, pricing analysis, labor cost review, and helping you make data-driven decisions about growth. At Momentum, our <a href="/services" class="text-primary-600 underline hover:text-primary-500">Growth Strategy and Complete Business Support packages</a> include monthly CFO-style advisory calls where we dig into your numbers and help you plan.'
+
+  - question: "Do I need to switch to QuickBooks Online to work with you?"
+    answer: "We specialize in QuickBooks Online because it's the best cloud-based platform for the small businesses we serve. If you're currently using desktop QuickBooks, spreadsheets, or another system, we can help you migrate. The transition is usually smoother than people expect, and the benefits of cloud-based access and real-time reporting are significant."
+
+  - question: "What's included in your QuickBooks cleanup service?"
+    answer: 'We review and correct your chart of accounts, reconcile bank and credit card transactions, remove or merge duplicate entries, categorize uncoded transactions, align payroll and sales tax records, and deliver clean, audit-ready financial reports. You also get a summary of everything we fixed so you know exactly what was wrong and what changed. The flat fee is $750 and most cleanups are completed within 7-10 business days. <a href="/services#cleanup" class="text-primary-600 underline hover:text-primary-500">Learn more about our cleanup service.</a>'
+
+  - question: "How long does onboarding take?"
+    answer: "Typically 1-2 weeks. We'll review your current books, set up secure access to your accounts, establish communication preferences, and outline what to expect each month. If your books need cleanup before we can start monthly services, we'll let you know upfront and handle that first."
+
+  - question: "What financial reports will I receive each month?"
+    answer: 'Every client receives a Profit & Loss statement, Balance Sheet, and Cash Flow report at minimum. Depending on your <a href="/services" class="text-primary-600 underline hover:text-primary-500">package</a>, you may also receive custom dashboards, budget-vs-actual comparisons, labor cost analysis, and KPI tracking. The goal is to give you numbers you can actually use to make decisions — not just data for data''s sake.'
+
+  - question: "Do you handle payroll taxes and filings?"
+    answer: 'Yes. Our <a href="/services" class="text-primary-600 underline hover:text-primary-500">Growth Strategy and Complete Business Support packages</a> include full payroll processing for up to 10 employees — that covers payroll runs, tax filings, direct deposits, and compliance. We make sure withholdings are correct, filings are on time, and you''re never surprised by a penalty.'
+
+  - question: "Can you work with my existing CPA or accountant?"
+    answer: "Absolutely. In fact, that's how it should work. We handle the ongoing bookkeeping and financial management; your CPA handles tax strategy and filing. We'll coordinate directly with your CPA at tax time and provide them with clean, organized financials so there's no duplication of effort."
+
+  - question: "What industries do you work with?"
+    answer: "We serve a range of service-based and product-based businesses including contractors, restaurants, retail, real estate, creative agencies, consulting firms, and professional services. If your business generates $500K-$5M in annual revenue and needs clean books and strategic financial support, we're likely a good fit regardless of industry."
 
   - question: "Do I need to be located in Washington State?"
-    answer: "Nope! We work remotely with clients across the U.S. using secure cloud-based tools."
+    answer: "No. We work remotely with clients across the U.S. using secure cloud-based tools. Your location doesn't matter — what matters is that your books are accurate and you have the financial clarity to make smart decisions."
 
-  - question: "What accounting software do you use?"
-    answer: "We use QuickBooks Online along with integrated tools for payroll, reporting, and document sharing."
+  - question: "How is Momentum different from other bookkeeping services?"
+    answer: 'Most bookkeeping services just categorize transactions and hand you a report. We started Momentum because business owners need more than that. Cade has actually run a small business — he''s managed the cash flow, handled the payroll, and stared at the QuickBooks screen at the end of a long day. That perspective shapes everything we do. We don''t just keep your books; we help you understand what your numbers mean and how to use them. <a href="/about" class="text-primary-600 underline hover:text-primary-500">Read our story.</a>'
 
-  - question: "How does onboarding work?"
-    answer: "We'll review your books, set up secure access, outline expectations, and launch your monthly services - typically within 1-2 weeks."
+  - question: "What if I only need help during tax season?"
+    answer: 'Our <a href="/services#cleanup" class="text-primary-600 underline hover:text-primary-500">QuickBooks cleanup service</a> is designed for exactly that. If your books are behind or disorganized heading into tax season, we can get them cleaned up and tax-ready without requiring a monthly commitment. If you decide you want ongoing support after that, we''re here — but there''s no pressure.'
 
-  - question: "Can you help clean up old books?"
-    answer: "Yes! We offer bookkeeping cleanup as a separate service. We'll assess your books and give you a custom quote."
+  - question: "Is my financial data secure?"
+    answer: "Yes. We use QuickBooks Online's built-in security along with secure file sharing and encrypted communications. We never share your financial information with third parties. Access to your accounts is limited to only what's needed to do the work, and you can revoke access at any time."
+
+  - question: "How do I get started?"
+    answer: '<a href="/contact" class="text-primary-600 underline hover:text-primary-500">Schedule a free discovery call.</a> We''ll talk about your current financial situation, what''s working, what''s not, and whether we''re a good fit. There''s no obligation and no pressure. If it makes sense for both of us, we''ll outline a plan and get started — typically within 1-2 weeks.'

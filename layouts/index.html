@@ -1,4 +1,25 @@
 {{ define "main" }}
+  <!-- Homepage FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {{ range $i, $q := where site.Data.faq.questions "homepage" true }}
+      {{ if $i }},{{ end }}
+      {
+        "@type": "Question",
+        "name": {{ .question | jsonify }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ .answer | plainify | jsonify }}
+        }
+      }
+      {{ end }}
+    ]
+  }
+  </script>
+
   {{ partial "hero.html" . }}
   {{ partial "cleanup-teaser.html" . }}
   {{ partial "features.html" . }}
