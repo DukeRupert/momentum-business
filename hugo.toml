@@ -11,6 +11,9 @@ title = 'Momentum Business Solutions'
   founderLinkedIn = 'https://www.linkedin.com/in/cade-maldonado-a71801104'
   companyLinkedIn = 'https://www.linkedin.com/company/momentum-business-solutions-llc'
 
+  # Cloudflare Turnstile site key
+  turnstileSiteKey = '0x4AAAAAACHzg6CfswYeCme9'
+
   [params.address]
     locality = 'Richland'
     region = 'WA'
@@ -22,9 +25,6 @@ title = 'Momentum Business Solutions'
     url = 'https://momentumbusiness.org/og-image.jpg'
     width = 1200
     height = 630
-
-  # Cloudflare Turnstile site key
-  turnstileSiteKey = '0x4AAAAAACHzg6CfswYeCme9'
 
 [markup]
   [markup.goldmark]
