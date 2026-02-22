@@ -86,7 +86,7 @@ func formatService(service string) string {
 	serviceMap := map[string]string{
 		"essentials":       "Essentials Package",
 		"growth-strategy":  "Growth Strategy Package",
-		"complete-support": "Executive Operations Package",
+		"complete-support": "Complete Business Support",
 		"consulting":       "Financial Consulting",
 		"cleanup":          "QuickBooks Cleanup",
 	}
@@ -529,7 +529,7 @@ func SendThankYouEmail(form *ContactForm, token, from string) error {
         <div class="main-content">
             <p>We sincerely appreciate you taking the time to reach out to Momentum Business Solutions. Your inquiry about our financial management services has been received and is very important to us.</p>
 
-            <p>We understand that managing your business finances can be complex, and we're here to help streamline those processes so you can focus on what you do best - growing your business.</p>
+            <p>We understand that managing your business finances can be complex, and we're here to handle the bookkeeping, payroll, and reporting so you can focus on what you do best - growing your business.</p>
         </div>
 
         <div class="timeline-box">
@@ -564,7 +564,7 @@ func SendThankYouEmail(form *ContactForm, token, from string) error {
 
 We sincerely appreciate you taking the time to reach out to Momentum Business Solutions. Your inquiry about our financial management services has been received and is very important to us.
 
-We understand that managing your business finances can be complex, and we're here to help streamline those processes so you can focus on what you do best - growing your business.
+We understand that managing your business finances can be complex, and we're here to handle the bookkeeping, payroll, and reporting so you can focus on what you do best - growing your business.
 
 WHAT HAPPENS NEXT?
 Within 24 hours: Cade from our team will personally review your submission and reach out to discuss your specific needs and how we can best support your business goals.
