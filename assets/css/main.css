@@ -344,8 +344,16 @@ h6 {
   background-color: var(--primary-500);
 }
 
+.hover\:bg-primary-100:hover {
+  background-color: var(--primary-100);
+}
+
 .hover\:text-primary-500:hover {
   color: var(--primary-500);
+}
+
+.hover\:text-primary-600:hover {
+  color: var(--primary-600);
 }
 
 /* Focus states */
@@ -355,6 +363,10 @@ h6 {
 
 .focus\:ring-primary-600:focus {
   --tw-ring-color: var(--primary-600);
+}
+
+.focus\:bg-primary-600:focus {
+  background-color: var(--primary-600);
 }
 
 /* Firefly Software Signature */

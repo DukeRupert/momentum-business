@@ -48,8 +48,8 @@ docker compose logs     # View logs
 
 Defined in `assets/css/main.css` with a newspaper-inspired type scale:
 - Custom font classes: `.text-kicker`, `.text-caption`, `.text-body`, `.text-subhead`, `.text-headline-*`, `.text-display-*`
-- Two font families: `--font-primary` (Manrope) for body, `--font-display` (Outfit) for headings
-- Color palette: `--primary-*` (cloud-burst blue) and `--secondary-*` (everglade green)
+- Single font family: `--font-primary` and `--font-display` both use Inter
+- Color palette: `--primary-*` (cloud-burst navy, based on #1C2657)
 - Custom color utility classes (`.bg-primary-*`, `.text-primary-*`, etc.) since these are CSS custom properties not in the Tailwind config
 
 ### Contact Form Flow
