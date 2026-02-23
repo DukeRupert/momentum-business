@@ -30,7 +30,7 @@ docker compose logs     # View logs
 - **Static Site**: Hugo with Go templates
 - **Styling**: Tailwind CSS v3 (`tailwind.config.js` scans `layouts/` and `content/`) with custom typography system
 - **Interactivity**: Alpine.js (loaded via CDN in `baseof.html`)
-- **API**: Go 1.21 HTTP server (stdlib only, no external deps) for contact form
+- **API**: Go 1.22 HTTP server (stdlib only, no external deps) for contact form
 - **Deployment**: Docker (multi-stage build) with Caddy reverse proxy
 - **Email**: Postmark for transactional emails
 - **Bot Protection**: Cloudflare Turnstile (site key in `hugo.toml`, secret key in env)
