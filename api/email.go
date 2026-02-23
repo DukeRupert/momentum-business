@@ -114,7 +114,10 @@ func getServiceClass(service string) string {
 // SendContactFormEmail sends the notification email to the business
 func SendContactFormEmail(form *ContactForm, token, to, from string) error {
 	// Get timestamp in PST
-	loc, _ := time.LoadLocation("America/Los_Angeles")
+	loc, err := time.LoadLocation("America/Los_Angeles")
+	if err != nil {
+		loc = time.UTC
+	}
 	timestamp := time.Now().In(loc).Format("Monday, January 2, 2006 at 3:04 PM MST")
 
 	// Build services tags HTML

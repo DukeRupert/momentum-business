@@ -17,6 +17,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o contact-api .
 # Stage 3: Final image with Caddy
 FROM caddy:2-alpine
 
+# Install timezone data (needed for time.LoadLocation in Go API)
+RUN apk add --no-cache tzdata
+
 # Copy Hugo static site
 COPY --from=hugo-builder /src/public /srv
 
