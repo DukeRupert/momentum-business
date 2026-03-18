@@ -22,7 +22,7 @@ title = 'Momentum Business Solutions'
     lng = '-119.2844'
 
   [params.ogImage]
-    url = 'https://momentumbusiness.org/og-image.jpg'
+    url = 'https://www.momentumbusiness.org/og-image.jpg'
     width = 1200
     height = 630
 
