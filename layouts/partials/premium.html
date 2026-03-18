@@ -4,7 +4,7 @@
       <h2 class="text-display-sm font-display-bold tracking-tight text-pretty text-gray-900 sm:text-display sm:text-balance">
         Ready for complete business support?
       </h2>
-      <p class="mx-auto mt-6 max-w-2xl text-body-lg font-primary-medium text-pretty text-gray-500 sm:text-subhead">
+      <p class="mx-auto mt-6 max-w-2xl text-body-lg font-primary-medium text-pretty text-gray-700 sm:text-subhead">
         Move beyond basic bookkeeping to proactive leadership with our complete business partnership package.
       </p>
     </div>
@@ -15,7 +15,7 @@
         <h2 class="text-headline font-display-semibold tracking-tight text-gray-900">
           {{ site.Data.services.premium.title }}
         </h2>
-        <p class="mt-6 text-body text-gray-600">
+        <p class="mt-6 text-body text-gray-700">
           {{ site.Data.services.premium.description }}
         </p>
 
@@ -26,7 +26,7 @@
           <div class="h-px flex-auto bg-gray-100"></div>
         </div>
 
-        <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-body text-gray-600 sm:grid-cols-2 sm:gap-6">
+        <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-body text-gray-700 sm:grid-cols-2 sm:gap-6">
           {{ range site.Data.services.premium.features }}
             <li class="flex gap-x-3">
               <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-6 w-5 flex-none text-primary-600">
@@ -55,7 +55,7 @@
             </p>
             <a
               href="{{ site.Data.services.premium.ctaHref }}"
-              class="mt-10 block w-full rounded-lg bg-primary-600 px-3 py-2 text-center text-body font-primary-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+              class="btn-primary mt-10 block w-full rounded-lg bg-primary-600 px-3 py-2 text-center text-body font-primary-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
               {{ site.Data.services.premium.ctaText }}
             </a>

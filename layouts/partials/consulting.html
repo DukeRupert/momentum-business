@@ -12,7 +12,7 @@
       </div>
 
       <!-- Description -->
-      <p class="text-body mb-6 text-gray-600">
+      <p class="text-body mb-6 text-gray-700">
         {{ site.Data.services.consulting.description }}
       </p>
 
@@ -29,7 +29,7 @@
               </svg>
               <div>
                 <span class="text-body font-primary-semibold text-gray-900">{{ .title }}</span>
-                <span class="text-body text-gray-600"> – {{ .description }}</span>
+                <span class="text-body text-gray-700"> – {{ .description }}</span>
               </div>
             </li>
           {{ end }}
@@ -46,7 +46,7 @@
     <div class="lg:mt-0 lg:flex-none">
       <a
         href="{{ site.Data.services.consulting.ctaHref }}"
-        class="bg-primary-600 text-body font-primary-semibold hover:bg-primary-500 focus-visible:outline-primary-600 inline-flex items-center rounded-lg px-4 py-2.5 text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+        class="btn-primary bg-primary-600 text-body font-primary-semibold hover:bg-primary-500 focus-visible:outline-primary-600 inline-flex items-center rounded-lg px-4 py-2.5 text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         {{ site.Data.services.consulting.ctaText }}
       </a>

@@ -428,6 +428,85 @@ h6 {
   .sig-divider-text { white-space: normal; text-align: center; }
 }
 
+/* Button Micro-interactions */
+.btn-primary,
+.btn-secondary {
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translateY(1px);
+  transition-duration: 0.05s;
+}
+
+/* Ghost link arrow nudge */
+.link-arrow span[aria-hidden] {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.link-arrow:hover span[aria-hidden] {
+  transform: translateX(3px);
+}
+
+/* Hero entrance animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  animation: fadeUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.hero-enter-1 { animation-delay: 0s; }
+.hero-enter-2 { animation-delay: 0.1s; }
+.hero-enter-3 { animation-delay: 0.2s; }
+.hero-enter-4 { animation-delay: 0.3s; }
+
+/* Success checkmark draw */
+@keyframes checkDraw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.check-draw path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: checkDraw 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-enter {
+  animation: scaleIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
 /* FAQ Accordion Styles */
 details > summary::-webkit-details-marker {
   display: none;
@@ -437,10 +516,18 @@ details > summary::marker {
   content: '';
 }
 
+details > summary {
+  transition: color 0.15s;
+}
+
+details > summary:hover {
+  color: var(--primary-600);
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
@@ -448,6 +535,46 @@ details > summary::marker {
   }
 }
 
-details[open] dd {
-  animation: slideDown 0.2s ease-out;
+details[open] dd,
+details[open] div {
+  animation: slideDown 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .check-draw path,
+  .scale-enter,
+  details[open] dd,
+  details[open] div,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: none;
+  }
+
+  .link-arrow:hover span[aria-hidden] {
+    transform: none;
+  }
 }

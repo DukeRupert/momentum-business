@@ -83,3 +83,29 @@ API_PORT=8080                # Go API port (defaults to 8080, use to avoid confl
 ### Deployment
 
 GitHub Actions (`.github/workflows/deploy.yml`): push to `main` → Docker build → push to Docker Hub → SSH deploy to VPS at `/opt/momentum-business`.
+
+## Design Context
+
+### Users
+Small business owners with $500K–$5M revenue. Non-technical, often overwhelmed by financial admin. They arrive stressed about their books and looking for someone trustworthy to take it off their plate. The job to be done: find a competent bookkeeper they can hand their finances to and stop worrying.
+
+### Brand Personality
+**Voice:** A knowledgeable colleague who happens to be great with money. Clear, calm, confident. Plain English, never jargon-first. Personally invested but never salesy.
+**3-word personality:** Trustworthy, calm, competent.
+**Emotional goals:** Relief ("finally, someone who gets it"), clarity ("I can see exactly what I'm getting"), and warmth ("this feels like working with a friend") — all three in equal balance.
+**Anti-personality:** Corporate, generic, flashy, cheap, robotic, salesy.
+
+### Aesthetic Direction
+**Visual tone:** Clean and minimal. Generous whitespace, restrained navy palette, content-first layouts. The calm confidence of a well-organized desk.
+**Theme:** Light mode only. White and soft gray alternating sections with navy reserved for hero, nav, footer, and CTAs.
+**Typography:** Inter throughout (single font family). Newspaper-inspired hierarchy with custom type scale classes defined in `assets/css/main.css`.
+**Color:** Navy palette anchored to `#1C2657` with gray neutrals. Max 3 colors per section. See `brand-guide.md` for full palette and usage rules.
+**Icons:** Lucide set, stroke width 1.5, navy on light / white on dark.
+**Imagery:** Real photography only (no stock). Solid color blocks with icons as fallback. See `brand-guide.md` for full rules.
+
+### Design Principles
+1. **Calm over clever.** Generous whitespace, restrained color, and clear hierarchy. When in doubt, add more space, not more elements.
+2. **Clarity is kindness.** Every heading leads with outcome, not feature. Every CTA says what happens next. No jargon, no ambiguity.
+3. **Earn trust quietly.** Specific numbers over vague claims. Real testimonials with real names. Certifications stated factually. Trust signals support the message — they aren't the message.
+4. **One action at a time.** One primary CTA per viewport. Pair with a secondary at most. Never compete for attention.
+5. **Accessible by default.** WCAG AA compliance. Visible focus rings, sufficient contrast, keyboard navigation, descriptive alt text. No decorative complexity that harms usability.
