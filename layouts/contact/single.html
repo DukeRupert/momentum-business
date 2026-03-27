@@ -489,6 +489,10 @@
           const result = await response.json();
 
           if (response.ok && result.success) {
+            // Track conversion in Plausible
+            if (typeof plausible !== 'undefined') {
+              plausible('Contact Form Submission');
+            }
             // Redirect to success page with query params
             const params = new URLSearchParams();
             if (this.formData.firstName) params.set('name', this.formData.firstName);
