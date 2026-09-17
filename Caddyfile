@@ -1,11 +1,21 @@
 {
     admin off
     auto_https off
+
+    # The host-level Caddy reverse proxy is the only thing that talks to this
+    # container. Trusting it means X-Forwarded-For is preserved and appended to
+    # rather than replaced, so the Go API still sees the real visitor IP.
+    servers {
+        trusted_proxies static private_ranges
+    }
 }
 
 :{$PORT:80} {
     # Proxy API requests to Go backend (must come first)
     handle /api/* {
+        # The Go API writes its own access log line per request; skipping it
+        # here keeps each API request logged exactly once.
+        log_skip
         reverse_proxy localhost:8080
     }
 
@@ -36,8 +46,13 @@
 
     encode gzip zstd
 
+    # Access log for the static site. Caddy's native JSON does not match the
+    # fleet logging standard (float epoch `ts`, lowercase `level`,
+    # msg "handled request", nested request.*, `duration` in seconds, `uri`
+    # instead of `path`) and needs mapping at the shipping layer. Never use
+    # `format console` — it emits ANSI colour codes.
     log {
         output stdout
-        format console
+        format json
     }
 }

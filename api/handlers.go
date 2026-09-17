@@ -2,9 +2,10 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"errors"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -19,9 +20,9 @@ type TurnstileResponse struct {
 }
 
 // verifyTurnstile verifies the Turnstile token with Cloudflare
-func verifyTurnstile(token, secretKey, remoteIP string) (bool, error) {
+func verifyTurnstile(ctx context.Context, token, secretKey, remoteIP string) (bool, error) {
 	if secretKey == "" {
-		log.Println("TURNSTILE_SECRET_KEY not set, skipping verification")
+		logFor(ctx).Warn("turnstile verification skipped", "reason", "secret key not configured")
 		return true, nil
 	}
 
@@ -59,7 +60,7 @@ func verifyTurnstile(token, secretKey, remoteIP string) (bool, error) {
 	}
 
 	if !result.Success {
-		log.Printf("Turnstile verification failed: %v", result.ErrorCodes)
+		logFor(ctx).Warn("turnstile verification failed", "error_codes", result.ErrorCodes)
 	}
 
 	return result.Success, nil
@@ -81,12 +82,16 @@ type ContactData struct {
 }
 
 func handleContact(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	log := logFor(ctx)
+	remoteIP := clientIP(r)
+
 	w.Header().Set("Content-Type", "application/json")
 
 	// Parse request body
 	var form ContactForm
 	if err := json.NewDecoder(r.Body).Decode(&form); err != nil {
-		log.Printf("Failed to decode request body: %v", err)
+		log.Warn("contact form decode failed", "error", err.Error())
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: false,
@@ -98,7 +103,7 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	// Check honeypot field - if filled, it's a bot
 	// Return fake success to not alert the bot
 	if strings.TrimSpace(form.Website) != "" {
-		log.Printf("Honeypot triggered - likely bot submission from IP: %s", r.RemoteAddr)
+		log.Info("honeypot triggered", "remote_ip", remoteIP)
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: true,
@@ -110,7 +115,7 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	// Verify Turnstile token
 	turnstileSecret := os.Getenv("TURNSTILE_SECRET_KEY")
 	if form.TurnstileResponse == "" && turnstileSecret != "" {
-		log.Printf("Missing Turnstile token from IP: %s", r.RemoteAddr)
+		log.Info("turnstile token missing", "remote_ip", remoteIP)
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: false,
@@ -120,9 +125,10 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if turnstileSecret != "" {
-		verified, err := verifyTurnstile(form.TurnstileResponse, turnstileSecret, r.RemoteAddr)
+		verified, err := verifyTurnstile(ctx, form.TurnstileResponse, turnstileSecret, remoteIP)
 		if err != nil {
-			log.Printf("Turnstile verification error: %v", err)
+			log.Error("turnstile verification errored", "error", err.Error())
+			noteRequestError(ctx, err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(ContactResponse{
 				Success: false,
@@ -131,7 +137,7 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if !verified {
-			log.Printf("Turnstile verification failed for IP: %s", r.RemoteAddr)
+			log.Info("turnstile check rejected", "remote_ip", remoteIP)
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(ContactResponse{
 				Success: false,
@@ -152,7 +158,7 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	// Validate form
 	validationResult := form.Validate()
 	if !validationResult.Valid {
-		log.Printf("Validation failed: %+v", validationResult.Errors)
+		log.Info("contact form validation failed", "field_count", len(validationResult.Errors))
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: false,
@@ -168,8 +174,11 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	postmarkFrom := os.Getenv("POSTMARK_FROM")
 
 	if postmarkToken == "" || postmarkTo == "" || postmarkFrom == "" {
-		log.Printf("Missing email configuration: token=%v, to=%v, from=%v",
-			postmarkToken != "", postmarkTo != "", postmarkFrom != "")
+		log.Error("email configuration missing",
+			"has_token", postmarkToken != "",
+			"has_to", postmarkTo != "",
+			"has_from", postmarkFrom != "")
+		noteRequestError(ctx, errors.New("postmark configuration incomplete"))
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: false,
@@ -180,7 +189,8 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 
 	// Send notification email to business
 	if err := SendContactFormEmail(&form, postmarkToken, postmarkTo, postmarkFrom); err != nil {
-		log.Printf("Failed to send contact form email: %v", err)
+		log.Error("email send failed", "kind", "notification", "to_domain", emailDomain(postmarkTo), "error", err.Error())
+		noteRequestError(ctx, err)
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(ContactResponse{
 			Success: false,
@@ -192,11 +202,10 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 	// Send thank you email to customer
 	if err := SendThankYouEmail(&form, postmarkToken, postmarkFrom); err != nil {
 		// Log the error but don't fail the request
-		log.Printf("Failed to send thank you email: %v", err)
+		log.Warn("email send failed", "kind", "thank you", "to_domain", emailDomain(form.Email), "error", err.Error())
 	}
 
-	log.Printf("Contact form submitted successfully: %s %s <%s>",
-		form.FirstName, form.LastName, form.Email)
+	log.Info("contact form submitted", "to_domain", emailDomain(form.Email), "has_phone", form.PhoneNumber != "")
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(ContactResponse{
@@ -207,4 +216,13 @@ func handleContact(w http.ResponseWriter, r *http.Request) {
 			Email:     form.Email,
 		},
 	})
+}
+
+// emailDomain returns the domain part of an address, for logging without
+// recording the address itself.
+func emailDomain(addr string) string {
+	if i := strings.LastIndex(addr, "@"); i >= 0 {
+		return addr[i+1:]
+	}
+	return ""
 }

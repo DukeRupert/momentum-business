@@ -1,13 +1,15 @@
 package main
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"strings"
 )
 
 func main() {
+	setupLogger()
+
 	// Get configuration from environment
 	// Use API_PORT to avoid conflict with Caddy's PORT
 	port := os.Getenv("API_PORT")
@@ -37,14 +39,14 @@ func main() {
 	mux.HandleFunc("POST /api/contact", handleContact)
 	mux.HandleFunc("GET /api/health", handleHealth)
 
-	// Wrap with CORS middleware
-	handler := corsMiddleware(mux, allowedOrigins)
+	// Wrap with CORS and access logging middleware
+	handler := loggingMiddleware(corsMiddleware(mux, allowedOrigins))
 
-	log.Printf("Starting API server on port %s", port)
-	log.Printf("Allowed origins: %v", allowedOriginsStr)
+	slog.Info("server starting", "addr", ":"+port, "allowed_origins", allowedOriginsStr)
 
 	if err := http.ListenAndServe(":"+port, handler); err != nil {
-		log.Fatal(err)
+		slog.Error("server stopped", "addr", ":"+port, "error", err.Error())
+		os.Exit(1)
 	}
 }
 
